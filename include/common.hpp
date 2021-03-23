@@ -21,7 +21,10 @@ namespace querrycpp
     /// SELECT 
     const std::string SELECT = "SELECT";
 
-    // TODO: Check speeling
+    /// LIST Operators
+    const std::string IN = "IN"; 
+
+    /// ORDER
     const std::string ORDER_BY = "ORDER BY";
     const std::string ASCENDING = "ASC";
     const std::string DESCENDING = "DSC"; 
