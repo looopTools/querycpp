@@ -1,12 +1,12 @@
-#ifndef QUERRY_COLUMN_HPP
-#define QUERRY_COLUMN_HPP
+#ifndef QUERY_COLUMN_HPP
+#define QUERY_COLUMN_HPP
 
 #include "database_data_type.hpp"
 
 #include <string>
 #include <vector>
 
-namespace querrycpp
+namespace querycpp
 {
 class column
 {
@@ -35,4 +35,4 @@ private:
 }; 
 }
 
-#endif /*QUERRY_COLUMN_HPP*/
+#endif /*QUERY_COLUMN_HPP*/

@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-namespace querrycpp
+namespace querycpp
 {
 
     column::column(std::string name, database::data_type type, std::vector<std::string> constraints) : _name(name), _type(type), _constraints(constraints)

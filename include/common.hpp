@@ -1,10 +1,11 @@
-#ifndef QUERRYCPP_COMMON_HPP
-#define QUERRYCPP_COMMON_HPP
+#ifndef QUERYCPP_COMMON_HPP
+#define QUERYCPP_COMMON_HPP
 
 #include <string>
 
-namespace querrycpp
+namespace querycpp
 {
+    const std::string TABLE = "TABLE"; 
 
     // CUD
     const std::string CREATE = "CREATE";
@@ -12,6 +13,9 @@ namespace querrycpp
     const std::string DROP = "DELETE";
     const std::string DELETE = "DELETE";
 
+    // CREATE CONSTRAITNS
+    const std::string IF_NOT_EXISTS = "IF NOT EXISTS"; 
+    
     // Keys
     const std::string PRIMARY = "PRIMARY KEY";
     
@@ -32,4 +36,4 @@ namespace querrycpp
 }
 
 
-#endif /*QUERRYCPP_COMMON_HPP*/ 
+#endif /*QUERYCPP_COMMON_HPP*/ 

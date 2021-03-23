@@ -1,26 +1,32 @@
-#ifndef QUERRYCPP_TABLE_HPP
-#define QUERRYCPP_TABLE_HPP
+#ifndef QUERYCPP_TABLE_HPP
+#define QUERYCPP_TABLE_HPP
+
+#include "column.hpp"
 
 #include <string>
 #include <vector>
 #include <map>
 
-namespace querrycpp
+namespace querycpp
 {
 class table
 {
 
 public:
 
-    /// TODO change to use columns class; 
-    table(const std::string table, const std::vector<std::string> columns);
-    table(std::string table, std::vector<std::string> columns, std::map<std::string, std::vector<std::string>> column_settings);
-    table(std::string table, std::map<std::string, std::vector<std::string>> columns_and_settings); 
+    table(const std::string& name, const std::vector<column>& columns);
+
+    std::string name() const;
+    void name(const std::string& name);
+
+    std::vector<column> columns() const;
+    void columns(std::vector<column>& columns); 
+    
 private:
 
-    const std::string _table;
-    std::vector<std::string> _columns;
-    std::map<std::string, std::vector<std::string>> _column_constraints; 
+    std::string _name;
+    std::vector<column> _columns;
+
 };
 }
-#endif /*QUERRYCPP_TABLE_HPP*/
+#endif /*QUERYCPP_TABLE_HPP*/

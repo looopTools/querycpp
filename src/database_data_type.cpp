@@ -1,6 +1,6 @@
-#include "database_data_types.hpp"
+#include "database_data_type.hpp"
 
-namespace querrycpp::database
+namespace querycpp::database
 {
     std::string type_to_string(data_type Type)
     {

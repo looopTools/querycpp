@@ -1,11 +1,10 @@
-#ifndef QUERRYCPP_DATABASE_DATA_TYPES_HPP
-#define QUERRYCPP_DATABASE_DATA_TYPES_HPP
+#ifndef QUERYCPP_DATABASE_DATA_TYPES_HPP
+#define QUERYCPP_DATABASE_DATA_TYPES_HPP
 
 #include <string>
 #include <vector>
-namespace querrycpp::database
+namespace querycpp::database
 {
-
     enum data_type
     {
         
@@ -29,4 +28,4 @@ namespace querrycpp::database
 
 }
 
-#endif /*QUERRYCPP_DATABASE_DATA_TYPES_HPP*/
+#endif /*QUERYCPP_DATABASE_DATA_TYPES_HPP*/

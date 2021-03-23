@@ -2,19 +2,29 @@
 
 #include <cstdint>
 
-namespace querrycpp
+namespace querycpp
 {
-    table::table(const std::string table, const std::vector<std::string> columns) : _table(table), _columns(columns) {}
+    table::table(const std::string& name, const std::vector<column>& columns) : _name(name), _columns(columns)
+    {}
 
-    table::table(std::string table, std::map<std::string, std::vector<std::string>> columns_and_settings) : _table(table)
+    std::string table::name() const
     {
-        std::vector<std::string> columns(columns_and_settings.size());
-        size_t column_index = 0; 
-        for (const auto& [column, constraints] : columns_and_settings)
-        {
-            columns.at(column_index) = column;
-            _column_constraints[column] = constraints;
-        }
+        return _name; 
+    }
+    
+    void table::name(const std::string& name)
+    {
+        _name = name; 
+    }
+
+    std::vector<column> table::columns() const
+    {
+        return _columns; 
+    }
+    
+    void table::columns(std::vector<column>& columns)
+    {
         _columns = columns; 
     }
+    
 }

@@ -6,9 +6,14 @@ INCLUDE_FLAGS = -I./include
 
 SRC_DIR = src/
 
-all: column_build
-	$(CXX) $(CXX_FLAGS) $(INCLUDE_FLAGS) $(SRC_DIR)table.cpp
+all: database_data_type_build column_build table_build query_build
 
+
+query_build:
+	$(CXX) $(CXX_FLAGS) $(INCLUDE_FLAGS) $(SRC_DIR)query.cpp $(LINK_FLAGS)
+
+table_build:
+	$(CXX) $(CXX_FLAGS) $(INCLUDE_FLAGS) $(SRC_DIR)table.cpp
 
 column_build:
 	$(CXX) $(CXX_FLAGS) $(INCLUDE_FLAGS) $(SRC_DIR)column.cpp
