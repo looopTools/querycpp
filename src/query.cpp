@@ -33,8 +33,6 @@ namespace querycpp
         return *this; 
     }
 
-    ///TODO if not exists
-
     
     
 

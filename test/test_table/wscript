@@ -1,0 +1,7 @@
+def build(bld):
+
+    bld(features = 'cxx cxxprogram',
+        target = 'test_table',
+        source = 'test_table.cpp',
+        use = ['querycpp-test-includes', 'querrycpp', 'gtest']
+    )

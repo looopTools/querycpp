@@ -1,0 +1,11 @@
+[
+    {
+        "sources": [
+            "github.com/AgileCloudLab/gtest.git"
+        ],
+        "major": 1,
+        "method": "semver",
+        "resolver": "git",
+        "name": "gtest"
+    }    
+]
