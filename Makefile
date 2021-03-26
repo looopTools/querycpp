@@ -2,7 +2,7 @@ CXX = clang++
 CXX_FLAGS = -std=c++17 -c
 LINK_FLAGS = -lfmt
 
-INCLUDE_FLAGS = -I./include
+INCLUDE_FLAGS = -I./include/querycpp
 
 SRC_DIR = src/
 
