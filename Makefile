@@ -4,9 +4,10 @@ LINK_FLAGS = -lfmt
 
 INCLUDE_FLAGS = -I./include/querycpp
 
-SRC_DIR = src/
+SRC_DIR = src/querycpp/
 
 all: database_data_type_build column_build table_build query_build
+	$(CXX) -c query.o table.o column.o database_data_type.o -o libquerrycpp.a
 
 
 query_build:

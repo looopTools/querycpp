@@ -32,33 +32,35 @@ def configure(cnf) :
     
 def build(bld):
 
-        
+
     bld(name = '{!s}-includes'.format(APPNAME),
         includes='./include/querycpp',
         export_includes='./include/querycpp')
-
+    
     bld.stlib(name = APPNAME,
         features = 'cxx cxxstlib',
         target='{!s}'.format(APPNAME),
         includes='../src',
-        source=bld.path.ant_glob('src/**/*.cpp'.format(APPNAME)),
+        source=bld.path.ant_glob('src/{!s}/**/*.cpp'.format(APPNAME)),
         use=['{!s}-includes'.format(APPNAME)]
     )
 
     bld(name = '{!s}-test-includes'.format(APPNAME),
         includes='./include',
         export_includes='./include')
+    
 
-
-    bld.recurse('test/test_column')    
-    bld.recurse('test/test_table')
+    bld.recurse('test/test_database_data_types')
+    bld.recurse('test/test_column')
+    
+ #   bld.recurse('test/test_table')
 
 
 
 
 
 def test(ctx):
-
+    subprocess.call(['./build/test/test_database_data_types/test_database_data_types'], encoding='utf-8')        
     subprocess.call(['./build/test/test_column/test_column'], encoding='utf-8')        
-    subprocess.call(['./build/test/test_table/test_table'], encoding='utf-8')
+#    subprocess.call(['./build/test/test_table/test_table'], encoding='utf-8')
 

@@ -12,12 +12,12 @@ TEST(test_querycpp_column, test_constructor)
 
     std::string name = "id";
     std::vector<std::string> constraints = {querycpp::PRIMARY};
+
+    querycpp::column c(name, querycpp::database::data_type::SERIAL); 
     
     querycpp::column column(name, querycpp::database::data_type::SERIAL, constraints);
 
-//    EXPECT_EQ(EXPECTED, column.str()); 
-
-    
+    EXPECT_EQ(EXPECTED, column.str());     
 }
 
 int main(int argc, char **argv) {

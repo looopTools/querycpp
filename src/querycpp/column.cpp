@@ -1,7 +1,7 @@
 #include "column.hpp"
 
 #include <sstream>
-
+#include <iostream>
 namespace querycpp
 {
 
@@ -43,6 +43,8 @@ namespace querycpp
     {
 
         std::stringstream ss;
+        
+        ss << _name << " ";
         ss << database::type_to_string(_type) << " ";
 
         bool first = true; 
