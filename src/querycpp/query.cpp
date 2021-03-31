@@ -1,9 +1,13 @@
 #include "query.hpp"
 #include "common.hpp"
 
+#include <fmt/core.h>
+
 #include <sstream> 
 
-#include <fmt/core.h>
+#include <algorithm>
+#include <stdexcept>
+
 namespace querycpp
 {
     query::query(table table) : _table(table), _query("") {}
@@ -30,6 +34,45 @@ namespace querycpp
 
         _query = ss.str().substr(0, ss.str().size() - 2) + ")";
         
+        return *this; 
+    }
+
+    query& query::SELECT(const std::string& column)
+    {
+        _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, column, commands::FROM, _table.name());
+        return *this; 
+    }
+
+    query& query::SELECT(const std::vector<std::string>& columns)
+    {
+        std::vector<std::string> table_columns;
+        for (const auto& column : _table.columns())
+        {
+            table_columns.emplace_back(column.name()); 
+        }
+
+        std::string columns_str = "";
+        
+        for (const auto& column : columns)
+        {
+            auto found = std::find(std::begin(table_columns), std::end(table_columns), column);
+            if (found == std::end(table_columns))
+            {
+                throw std::runtime_error(fmt::format("column: {} not found for table {}", column, _table.name())); 
+            }
+
+            if (columns_str.size() == 0)
+            {
+                columns_str = fmt::format("{}, ", column); 
+            }
+            else
+            {
+                columns_str = fmt::format("{} {},", column); 
+            }
+        }
+        columns_str = columns_str.substr(0, columns_str.size() - 1);
+
+        _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, commands::FROM, _table.name()); 
         return *this; 
     }
 
