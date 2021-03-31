@@ -11,7 +11,7 @@ TEST(test_querycpp_column, test_constructor)
     const std::string EXPECTED = "id SERIAL PRIMARY KEY";
 
     std::string name = "id";
-    std::vector<std::string> constraints = {querycpp::PRIMARY};
+    std::vector<std::string> constraints = {querycpp::constraints::PRIMARY};
 
     querycpp::column c(name, querycpp::database::data_type::SERIAL); 
     

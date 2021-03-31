@@ -8,18 +8,18 @@ namespace querycpp
 {
     query::query(table table) : _table(table), _query("") {}
 
-    query& query::create(bool if_not_exists)
+    query& query::CREATE(bool if_not_exists)
     {
 
         std::stringstream ss;
 
         if (if_not_exists)
         {
-            ss << fmt::format("{} {} {} {} (", CREATE, IF_NOT_EXISTS, TABLE, _table.name());
+            ss << fmt::format("{} {} {} {} (", commands::CREATE, commands::IF_NOT_EXISTS, commands::TABLE, _table.name());
         }
         else
         {
-            ss << fmt::format("{} {} {} (", CREATE, TABLE, _table.name());
+            ss << fmt::format("{} {} {} (", commands::CREATE, commands::TABLE, _table.name());
         }
 
 
@@ -31,6 +31,42 @@ namespace querycpp
         _query = ss.str().substr(0, ss.str().size() - 2) + ")";
         
         return *this; 
+    }
+
+    query& query::WHERE()
+    {
+        _query = fmt::format("{} {}", _query, commands::WHERE);
+        return *this; 
+    }
+
+    query& query::AND()
+    {
+        _query = fmt::format("{} {}", _query, commands::AND);
+        return *this; 
+    }
+
+    query& query::OR()
+    {
+        _query = fmt::format("{} {}", _query, commands::OR);
+        return *this; 
+    }    
+
+    query& query::GT(const std::string& lhs, const std::string rhs)
+    {
+        _query = fmt::format("{} {} > {}", _query, lhs, rhs);
+        return *this; 
+    }
+    
+    query& query::LT(const std::string& lhs, const std::string rhs)
+    {
+        _query = fmt::format("{} {} < {}", _query, lhs, rhs);
+        return *this; 
+    }
+    
+    query& query::EQ(const std::string& lhs, const std::string rhs)
+    {
+        _query = fmt::format("{} {} < {}", _query, lhs, rhs);
+        return *this;
     }
 
     

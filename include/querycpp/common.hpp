@@ -3,8 +3,9 @@
 
 #include <string>
 
-namespace querycpp
+namespace querycpp::commands
 {
+    
     const std::string TABLE = "TABLE"; 
 
     // CUD
@@ -16,11 +17,11 @@ namespace querycpp
     // CREATE CONSTRAITNS
     const std::string IF_NOT_EXISTS = "IF NOT EXISTS"; 
     
-    // Keys
-    const std::string PRIMARY = "PRIMARY KEY";
-    
     // General
-    const std::string WHERE = "WHERE"; 
+    const std::string WHERE = "WHERE";
+
+    const std::string AND = "AND";
+    const std::string OR = "OR"; 
 
     /// SELECT 
     const std::string SELECT = "SELECT";
@@ -33,6 +34,14 @@ namespace querycpp
     const std::string ASCENDING = "ASC";
     const std::string DESCENDING = "DSC"; 
     
+}
+
+
+// TODO: Move to seperate header
+namespace querycpp::constraints
+{
+    // Keys
+    const std::string PRIMARY = "PRIMARY KEY";
 }
 
 
