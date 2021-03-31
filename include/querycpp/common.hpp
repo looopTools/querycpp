@@ -37,12 +37,7 @@ namespace querycpp::commands
 }
 
 
-// TODO: Move to seperate header
-namespace querycpp::constraints
-{
-    // Keys
-    const std::string PRIMARY = "PRIMARY KEY";
-}
+
 
 
 #endif /*QUERYCPP_COMMON_HPP*/ 

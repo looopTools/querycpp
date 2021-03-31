@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <querycpp/common.hpp>
+#include <querycpp/constraints.hpp>
 #include <querycpp/column.hpp>
 
 #include <string>
