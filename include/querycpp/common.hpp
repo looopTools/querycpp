@@ -11,8 +11,10 @@ namespace querycpp::commands
     // CUD
     const std::string CREATE = "CREATE";
     const std::string UPDATE = "UPDATE";
-    const std::string DROP = "DELETE";
+    const std::string DROP = "DROP";
     const std::string DELETE = "DELETE";
+
+    const std::string FROM = "FROM"; 
 
     // CREATE CONSTRAITNS
     const std::string IF_NOT_EXISTS = "IF NOT EXISTS"; 
