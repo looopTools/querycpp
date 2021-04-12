@@ -5,6 +5,11 @@
 
 TEST(test_querycpp_table, test_constructor)
 {
+
+    querry::column id("id", querycpp::database::data_type::SERIAL, {querycpp::constraints::PRIMARY});
+    querry::column text("text", querycpp::database::data_type::VARCHAR, {"2"});
+    (void) id;
+    (void) text;
     
     EXPECT_TRUE(true); 
 }

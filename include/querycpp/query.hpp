@@ -31,7 +31,13 @@ public:
 
     query& GT(const std::string& lhs, const std::string rhs);
     query& LT(const std::string& lhs, const std::string rhs);
-    query& EQ(const std::string& lhs, const std::string rhs); 
+    query& EQ(const std::string& lhs, const std::string rhs);
+
+    query& IN();
+    query& IN(query& sub_query); 
+
+    query& BEGIN_NESTED();
+    query& END_NESTED();      
 
     /// @param clean cleans the query string already build 
     std::string str(bool clean = false);

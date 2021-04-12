@@ -1,4 +1,5 @@
 #include "query.hpp"
+#include "common.hpp" 
 #include "commands.hpp"
 #include "operators.hpp"
 
@@ -113,8 +114,29 @@ namespace querycpp
         return *this;
     }
 
+    query& query::IN()
+    {
+        _query = fmt::format("{} IN", _query);
+        return *this; 
+    }
+
+    query& query::IN(query& sub_query)
+    {
+        _query = fmt::format("{} IN {} {} {}", _query, common::symbols::LEFT_PARENTHESE, sub_query.str(), common::symbols::RIGHT_PARENTHESE);
+        return *this; 
+    }
+
+    query& query::BEGIN_NESTED()
+    {
+        _query = fmt::format("{} {}", _query, common::symbols::LEFT_PARENTHESE);
+        return *this;
+    }
     
-    
+    query& query::END_NESTED()
+    {
+        _query = fmt::format("{} {}", _query, common::symbols::RIGHT_PARENTHESE);
+        return *this;   
+    }
 
     std::string query::str(bool clean)
     {
