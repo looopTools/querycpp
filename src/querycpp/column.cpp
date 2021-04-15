@@ -64,4 +64,9 @@ namespace querycpp
         auto result = ss.str();
         return result.substr(0, result.size() - 1);         
     }
+
+    bool column::operator==(const column& other)
+    {
+        return str() == other.str(); 
+    }
 }

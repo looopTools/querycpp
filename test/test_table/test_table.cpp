@@ -1,17 +1,23 @@
 #include <gtest/gtest.h>
 
+#include <querycpp/constraints.hpp>
 #include <querycpp/column.hpp>
 #include <querycpp/table.hpp>
 
 TEST(test_querycpp_table, test_constructor)
 {
 
-    querry::column id("id", querycpp::database::data_type::SERIAL, {querycpp::constraints::PRIMARY});
-    querry::column text("text", querycpp::database::data_type::VARCHAR, {"2"});
-    (void) id;
-    (void) text;
+    querycpp::column id("id", querycpp::database::data_type::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::data_type::VARCHAR, {"2"});
+
+    querycpp::table tbl("test", {id, text});
+
+    EXPECT_EQ("test", tbl.name());
+
+    auto columns = tbl.columns();
     
-    EXPECT_TRUE(true); 
+    EXPECT_TRUE(columns.at(0) == id);
+    EXPECT_TRUE(columns.at(1) == text); 
 }
 
 int main(int argc, char **argv) {

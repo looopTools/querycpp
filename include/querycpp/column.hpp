@@ -23,7 +23,9 @@ public:
     std::vector<std::string> constraints() const;
     void constraints(const std::vector<std::string>& new_constraints);
 
-    std::string str() const; 
+    std::string str() const;
+
+    bool operator==(const column& other);
 
 
 private:
