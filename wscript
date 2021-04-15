@@ -1,14 +1,11 @@
 from waflib.Tools.compiler_cxx import cxx_compiler
 #from scripts.waf import utils
-
-# import subprocess
+#!/usr/bin/env python3
 import os
 import sys
 import subprocess
 
-
-
-APPNAME = 'querycpp' #TODO: REPLACE
+APPNAME = 'querycpp'
 VERSION = '0.0.1' #TODO: REPLACE 
 
 cxx_compiler['linux'] = ['clang++']
@@ -32,7 +29,6 @@ def configure(cnf) :
     
 def build(bld):
 
-
     bld(name = '{!s}-includes'.format(APPNAME),
         includes='./include/querycpp',
         export_includes='./include/querycpp')
@@ -54,15 +50,8 @@ def build(bld):
     bld.recurse('test/test_column')
     bld.recurse('test/test_table')    
     
- #   bld.recurse('test/test_table')
-
-
-
-
-
 def test(ctx):
     subprocess.call(['./build/test/test_database_data_types/test_database_data_types'], encoding='utf-8')        
     subprocess.call(['./build/test/test_column/test_column'], encoding='utf-8')
     subprocess.call(['./build/test/test_table/test_table'], encoding='utf-8')            
-#    subprocess.call(['./build/test/test_table/test_table'], encoding='utf-8')
 
