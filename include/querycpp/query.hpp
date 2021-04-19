@@ -34,7 +34,8 @@ public:
     query& EQ(const std::string& lhs, const std::string rhs);
 
     query& IN();
-    query& IN(query& sub_query); 
+    query& IN(query& sub_query);
+    query& IN(const std::string& params_list);     
 
     query& BEGIN_NESTED();
     query& END_NESTED();      

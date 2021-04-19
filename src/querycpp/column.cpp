@@ -45,24 +45,22 @@ namespace querycpp
         std::stringstream ss;
         
         ss << _name << " ";
-        ss << database::type_to_string(_type) << " ";
+        ss << database::type_to_string(_type);
 
         bool first = true; 
         for (const auto& constraint : _constraints)
         {
             if (_type == database::data_type::VARCHAR && first)
             {
-                ss << "(" << constraint << ") ";
+                ss << "(" << constraint << ")";
                 first = false; 
             }
             else
             {    
-                ss << constraint << " ";
+                ss << " " << constraint;
             }
         }
-
-        auto result = ss.str();
-        return result.substr(0, result.size() - 1);         
+        return ss.str(); 
     }
 
     bool column::operator==(const column& other)

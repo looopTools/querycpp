@@ -21,6 +21,15 @@ TEST(test_querycpp_column, test_constructor)
     EXPECT_EQ(EXPECTED, column.str());     
 }
 
+TEST(test_querycpp_column, test_varchar)
+{
+    const std::string EXPECTED = "text VARCHAR(3)";
+
+    querycpp::column column("text", querycpp::database::data_type::VARCHAR, {"3"});
+    
+    EXPECT_EQ(EXPECTED, column.str()); 
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

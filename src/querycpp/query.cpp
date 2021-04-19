@@ -126,6 +126,12 @@ namespace querycpp
         return *this; 
     }
 
+    query& query::IN(const std::string& params_list)
+    {
+        _query = fmt::format("{} IN {} {} {}", _query, common::symbols::LEFT_PARENTHESE, params_list, common::symbols::RIGHT_PARENTHESE);
+        return *this; 
+    }
+
     query& query::BEGIN_NESTED()
     {
         _query = fmt::format("{} {}", _query, common::symbols::LEFT_PARENTHESE);
