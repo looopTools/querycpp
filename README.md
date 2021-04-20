@@ -49,3 +49,29 @@ python waf build
 
 # License 
 
+
+# Supported Data types
+
+## Common 
+
+### Numerical 
+
+- NUMERICAL
+- BITINT
+- SMALLINT
+
+### Strings 
+
+- VARCHAR is fully supported. To set the length of a varchar, the first constraint must be the length.  
+
+## PostgreSQL
+
+### Numerical
+
+- SERIAL
+- BITSERIAL
+- NUMERIC
+
+## MariaDB / MySQL
+
+TBW
