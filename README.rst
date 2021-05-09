@@ -10,9 +10,4 @@ Query C++ is a library for easy SQL query building for modern C++ for multiple S
 External dependencies
 =============
 
-Query C++ dependes on '_fmtlib'_
-
-
-
-
-_fmtlib: https://github.com/fmtlib/fmt
+Query C++ dependes on fmt (https://github.com/fmtlib/fmt). 
