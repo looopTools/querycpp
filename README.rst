@@ -24,8 +24,19 @@ In the header ``include/database_data_type.hpp`` you will find the string litera
 Common
 -----------
 
-Test
+Data types shown in this section is shared between at least two different data base systems
+
+Numerical
 ===========
+
+- ``NUMBER``
+- ``SMALLINT``
+- ``BIGINT``
+
+String 
+===========  
+
+- ``VARCHAR``
 
 -----------
 PostgreSQL

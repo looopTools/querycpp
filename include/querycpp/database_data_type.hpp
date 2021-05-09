@@ -10,7 +10,7 @@ namespace querycpp::database::common
 namespace NUMERICAL
 {
     const std::string NUMBER = "NUMBER";
-    const std::string BIG_INT = "BIG_INT";
+    const std::string BIG_INT = "BIGINT";
     const std::string SMALL_INT = "SMALLINT";
 }
 
