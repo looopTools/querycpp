@@ -12,6 +12,11 @@ namespace postgre
 {
     const std::string REFERENCE = "REFERENCE"; 
 }
+
+namespace mariadb
+{
+    const std::string AUTO_INCREMENT = "AUTO_INCREMENT"; 
+}
 }
 
 

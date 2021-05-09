@@ -33,3 +33,15 @@
 *.exe
 *.out
 *.app
+
+# Waf
+
+.waf*/
+.lock-waf*
+build_current/
+resolve_symlinks/
+resolved_dependencies/
+
+# CMAKE
+
+build/

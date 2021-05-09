@@ -30,6 +30,11 @@ TEST(test_querycpp_column, test_varchar)
     EXPECT_EQ(EXPECTED, column.str()); 
 }
 
+TEST(test_querycpp_column, test_postgre_numerical)
+{
+    const std::string EXPECTED_SERIAL = "id SERIAL"; 
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
