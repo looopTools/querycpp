@@ -3,32 +3,44 @@
 
 #include <string>
 #include <vector>
-namespace querycpp::database
+
+namespace querycpp::database::common
 {
-    enum data_type
-    {
-        
-        // Standard Number Types
-        NUMBER,
-        BIG_INT,
-        SMALL_INT,
-        
-    
-        // Standard String types
-        VARCHAR,
-        
-        // Postgres Number Types
-        SERIAL,
-        BIG_SERIAL,
-        NUMERIC
-    
-    };
 
-    const std::vector<std::string> data_types_as_strings {"NUMBER", "BIGINT", "SMALL_INT", "VARCHAR", "SERIAL", "BIG_SERIAL", "NUMERIC"};
+namespace NUMERICAL
+{
+    const std::string NUMBER = "NUMBER";
+    const std::string BIG_INT = "BIG_INT";
+    const std::string SMALL_INT = "SMALLINT";
+}
 
+namespace STRING
+{
+    const std::string VARCHAR = "VARCHAR";
+}
 
-    std::string type_to_string(data_type Type); 
+}
 
+namespace querycpp::database::postgres
+{
+namespace NUMERICAL
+{
+    const std::string SMALL_SERIAL = "SMALLSERIAL";
+    const std::string SERIAL = "SERIAL";
+    const std::string BIG_SERIAL = "BIGSERIAL";
+    const std::string NUMERIC = "NUMERIC";
+    const std::string INTEGER = "INTEGER";
+    const std::string DECIMAL = "DECIMAL";
+    const std::string REAL = "REAL";
+    const std::string DOUBLE_PRECISION = "DOUBLE PRECISION";
+}
+
+namespace BINARY
+{
+    const std::string BYTEA = "BYTEA";
+    const std::string BIT = "BIT";
+    const std::string BIT_VARYING = "BIT VARYING";
+}
 }
 
 #endif /*QUERYCPP_DATABASE_DATA_TYPES_HPP*/

@@ -11,3 +11,22 @@ External dependencies
 =============
 
 Query C++ dependes on fmt (https://github.com/fmtlib/fmt). 
+
+
+=============
+Suported Data Types
+=============
+
+In this section we list all data types supported.
+In the header ``include/database_data_type.hpp`` you will find the string literal definition of the data types supported. 
+
+-----------
+Common
+-----------
+
+Test
+===========
+
+-----------
+PostgreSQL
+-----------
