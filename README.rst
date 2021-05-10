@@ -42,9 +42,9 @@ To utilise waf.io for building you will ned to install python3+.
 Change working directory to the Query C++ and we can start.
 First you will need to configure the project:
 
-```python
+
     python waf configure
-```
+
 
 
 =============
