@@ -7,6 +7,12 @@ Query C++ is a library for easy SQL query building for modern C++ for multiple S
 **NOTE:** This library is not in a production ready state
 
 =============
+License
+=============
+
+Query C++ is licensed under the BSD v3 license, for more information see the LICENSE file.  
+
+=============
 Setup And Build
 =============
 
