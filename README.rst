@@ -7,10 +7,17 @@ Query C++ is a library for easy SQL query building for modern C++ for multiple S
 **NOTE:** This library is not in a production ready state
 
 =============
-External dependencies
+Setup And Build
 =============
 
-Query C++ dependes on fmt (https://github.com/fmtlib/fmt). 
+-------------
+External dependencies
+-------------
+
+Query C++ dependes on fmt (https://github.com/fmtlib/fmt).
+If you use CMake and Conan this dependency is handled for you.
+
+If you use `waf` or `cmake` it is not handled for you and you must install it manually, in the current setup. 
 
 
 =============
@@ -41,3 +48,15 @@ String
 -----------
 PostgreSQL
 -----------
+
+Numerical
+===========
+
+- ``SMALLSERIAL``
+- ``SERIAL``
+- ``BIGSERIAL``
+- ``NUMERIC``
+- ``INTEGER``
+- ``DECIMAL``
+- ``REAL``
+- ``DOUBLE PRECISION``
