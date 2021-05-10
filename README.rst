@@ -10,17 +10,20 @@ Query C++ is a library for easy SQL query building for modern C++ for multiple S
 Setup And Build
 =============
 
-If you want to build Query C++ from source, we provide three different options for this; 1) CMake, 2) Make, and 3) waf.io.
+If you want to build Query C++ from source, we provide three different options for this; 1) `cmake` 2) `make`, and 3) `waf.io`.
 In the following we will explain how to setup and build using the three methods. 
 
 -------------
 External dependencies
 -------------
 
-Query C++ dependes on fmt (https://github.com/fmtlib/fmt).
-If you use CMake and Conan this dependency is handled for you.
+Query C++ dependes on `fmt` (https://github.com/fmtlib/fmt).
+If you use `cmake` and Conan this dependency is handled for you.
 
-If you use `waf` or `cmake` it is not handled for you and you must install it manually, in the current setup.
+If you use `waf` or `make` it is not handled for you and you must install it manually, in the current setup.
+
+For test we depend on `gtest` (https://github.com/google/googletest) for both CMake and Waf this dependency is automactically handled.
+For `make` you will need to handle this depedency. 
 
 -------------
 CMake
@@ -45,6 +48,9 @@ First you will need to configure the project:
 
     python waf configure
 
+After this you can build the system by executing
+
+    python waf build 
 
 
 =============
