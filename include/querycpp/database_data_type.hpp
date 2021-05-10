@@ -4,26 +4,26 @@
 #include <string>
 #include <vector>
 
-namespace querycpp::database::common
+namespace querycpp::database::type::common
 {
 
-namespace NUMERICAL
+namespace numerical
 {
     const std::string NUMBER = "NUMBER";
     const std::string BIG_INT = "BIGINT";
     const std::string SMALL_INT = "SMALLINT";
 }
 
-namespace STRING
+namespace string
 {
     const std::string VARCHAR = "VARCHAR";
 }
 
 }
 
-namespace querycpp::database::postgres
+namespace querycpp::database::type::postgres
 {
-namespace NUMERICAL
+namespace numerical
 {
     const std::string SMALL_SERIAL = "SMALLSERIAL";
     const std::string SERIAL = "SERIAL";
@@ -35,7 +35,7 @@ namespace NUMERICAL
     const std::string DOUBLE_PRECISION = "DOUBLE PRECISION";
 }
 
-namespace BINARY
+namespace binary
 {
     const std::string BYTEA = "BYTEA";
     const std::string BIT = "BIT";

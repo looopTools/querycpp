@@ -12,13 +12,13 @@ class column
 {
 public:
     /// Currently if type = VARCHAR then first contraint is the length
-    column(std::string name, database::data_type type, std::vector<std::string> constraints = std::vector<std::string>());
+    column(std::string name, const std::string& type, std::vector<std::string> constraints = std::vector<std::string>());
 
     std::string name() const;
     void name(const std::string& name);
 
-    database::data_type type() const;
-    void type(const database::data_type type);
+    std::string type() const;
+    void type(const std::string& type);
 
     std::vector<std::string> constraints() const;
     void constraints(const std::vector<std::string>& new_constraints);
@@ -31,7 +31,7 @@ public:
 private:
 
     std::string _name;
-    database::data_type _type; 
+    std::string _type; 
     std::vector<std::string> _constraints;
 
 }; 

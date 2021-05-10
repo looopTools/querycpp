@@ -3,13 +3,13 @@
 
 TEST(test_database_data_types, type_to_string)
 {
-    EXPECT_EQ("NUMBER", querycpp::database::type_to_string(querycpp::database::data_type::NUMBER));
+    EXPECT_EQ("NUMBER", querycpp::database::type_to_string(querycpp::database::data_type::common::numerical::NUMBER));
 
-    EXPECT_EQ("BIGINT", querycpp::database::type_to_string(querycpp::database::data_type::BIG_INT));
+    EXPECT_EQ("BIGINT", querycpp::database::type_to_string(querycpp::database::data_type::common::numerical::BIG_INT));
 
-    EXPECT_EQ("VARCHAR", querycpp::database::type_to_string(querycpp::database::data_type::VARCHAR));
+    EXPECT_EQ("VARCHAR", querycpp::database::type_to_string(querycpp::database::data_type::common::string::VARCHAR));
 
-    EXPECT_EQ("SERIAL", querycpp::database::type_to_string(querycpp::database::data_type::SERIAL));
+    EXPECT_EQ("SERIAL", querycpp::database::type_to_string(querycpp::database::data_type::postgres::numerical::SERIAL));
 
 }
 

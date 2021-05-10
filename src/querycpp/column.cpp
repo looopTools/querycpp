@@ -5,7 +5,7 @@
 namespace querycpp
 {
 
-    column::column(std::string name, database::data_type type, std::vector<std::string> constraints) : _name(name), _type(type), _constraints(constraints)
+    column::column(std::string name, const std::string& type, std::vector<std::string> constraints) : _name(name), _type(type), _constraints(constraints)
     {
     }
 
@@ -19,12 +19,12 @@ namespace querycpp
         _name = name; 
     }
 
-    database::data_type column::type() const
+    std::string column::type() const
     {
         return _type; 
     }
 
-    void column::type(const database::data_type type)
+    void column::type(const std::string& type)
     {
         _type = type; 
     }
@@ -45,12 +45,13 @@ namespace querycpp
         std::stringstream ss;
         
         ss << _name << " ";
-        ss << database::type_to_string(_type);
+        ss << _type; 
 
+        
         bool first = true; 
         for (const auto& constraint : _constraints)
         {
-            if (_type == database::data_type::VARCHAR && first)
+            if (_type == database::type::common::string::VARCHAR && first)
             {
                 ss << "(" << constraint << ")";
                 first = false; 

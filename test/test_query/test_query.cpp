@@ -7,8 +7,8 @@
 
 TEST(test_querycpp_query, test_create)
 {
-    querycpp::column id("id", querycpp::database::data_type::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::data_type::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl); 
 

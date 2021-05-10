@@ -47,13 +47,13 @@ def build(bld):
         export_includes='./include')
     
 
-    bld.recurse('test/test_database_data_types')
+#    bld.recurse('test/test_database_data_types')
     bld.recurse('test/test_column')
     bld.recurse('test/test_table')
     bld.recurse('test/test_query')
     
 def test(ctx):
-    subprocess.call(['./build/test/test_database_data_types/test_database_data_types'], encoding='utf-8')        
+#    subprocess.call(['./build/test/test_database_data_types/test_database_data_types'], encoding='utf-8')        
     subprocess.call(['./build/test/test_column/test_column'], encoding='utf-8')
     subprocess.call(['./build/test/test_table/test_table'], encoding='utf-8')
     subprocess.call(['./build/test/test_query/test_query'], encoding='utf-8')                
