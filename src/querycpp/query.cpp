@@ -129,21 +129,21 @@ namespace querycpp
         return *this;
     }
 
-    query& query::IN()
+    query& query::IN(const std::string& column)
     {
-        _query = fmt::format("{} IN", _query);
+        _query = fmt::format("{} {} {}", _query, column, commands::IN);
         return *this; 
     }
 
-    query& query::IN(query& sub_query)
+    query& query::IN(const std::string& column, query& sub_query)
     {
-        _query = fmt::format("{} IN {} {} {}", _query, common::symbols::LEFT_PARENTHESE, sub_query.str(), common::symbols::RIGHT_PARENTHESE);
+        _query = fmt::format("{} {} {} {}{}{}", _query, column, commands::IN, common::symbols::LEFT_PARENTHESE, sub_query.str(), common::symbols::RIGHT_PARENTHESE);
         return *this; 
     }
 
-    query& query::IN(const std::string& params_list)
+    query& query::IN(const std::string& column, const std::string& params_list)
     {
-        _query = fmt::format("{} IN {} {} {}", _query, common::symbols::LEFT_PARENTHESE, params_list, common::symbols::RIGHT_PARENTHESE);
+        _query = fmt::format("{} {} {} {}{}{}", _query, column, commands::IN, common::symbols::LEFT_PARENTHESE, params_list, common::symbols::RIGHT_PARENTHESE);
         return *this; 
     }
 
