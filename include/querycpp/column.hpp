@@ -13,6 +13,8 @@ class column
 public:
     /// Currently if type = VARCHAR then first contraint is the length
     column(std::string name, const std::string& type, std::vector<std::string> constraints = std::vector<std::string>());
+    
+    column(const column& old); 
 
     std::string name() const;
     void name(const std::string& name);
@@ -26,6 +28,10 @@ public:
     std::string str() const;
 
     bool operator==(const column& other);
+
+private:
+
+    bool is_length_type(const std::string& type) const;
 
 
 private:

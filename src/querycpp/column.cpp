@@ -9,6 +9,13 @@ namespace querycpp
     {
     }
 
+    column::column(const column& old)
+    {
+        _name = old._name;
+        _type = old._type;
+        _constraints = old._constraints; 
+    }
+
     std::string column::name() const
     {
         return _name; 
@@ -51,7 +58,7 @@ namespace querycpp
         bool first = true; 
         for (const auto& constraint : _constraints)
         {
-            if (_type == database::type::common::string::VARCHAR && first)
+            if (is_length_type(_type) && first)
             {
                 ss << "(" << constraint << ")";
                 first = false; 
@@ -67,5 +74,10 @@ namespace querycpp
     bool column::operator==(const column& other)
     {
         return str() == other.str(); 
+    }
+
+    bool column::is_length_type(const std::string& type) const
+    {
+        return type == (database::type::common::string::VARCHAR);
     }
 }

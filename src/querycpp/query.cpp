@@ -41,7 +41,14 @@ namespace querycpp
 
     query& query::SELECT(const std::string& column)
     {
-        _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, column, commands::FROM, _table.name());
+        if (_query.size() == 0)
+        {
+             _query = fmt::format("{} {} {} {}", commands::SELECT, column, commands::FROM, _table.name());
+        }
+        else
+        {
+            _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, column, commands::FROM, _table.name());
+        }
         return *this; 
     }
 
@@ -74,7 +81,15 @@ namespace querycpp
         }
         columns_str = columns_str.substr(0, columns_str.size() - 1);
 
-        _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, commands::FROM, _table.name()); 
+        if (_query.size() == 0)
+        {
+            _query = fmt::format("{} {} {} {}", commands::SELECT, commands::FROM, _table.name()); 
+        }
+        else
+        {
+            _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, commands::FROM, _table.name()); 
+        }
+        
         return *this; 
     }
 
