@@ -51,6 +51,9 @@ def build(bld):
     bld.recurse('test/test_column')
     bld.recurse('test/test_table')
     bld.recurse('test/test_query')
+
+    # Build Examples
+    bld.recurse('examples/simple_example')
     
 def test(ctx):
 #    subprocess.call(['./build/test/test_database_data_types/test_database_data_types'], encoding='utf-8')        

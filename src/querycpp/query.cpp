@@ -72,22 +72,22 @@ namespace querycpp
 
             if (columns_str.size() == 0)
             {
-                columns_str = fmt::format("{}, ", column); 
+                columns_str = fmt::format("{},", column); 
             }
             else
             {
-                columns_str = fmt::format("{} {},", column); 
+                columns_str = fmt::format("{} {},", columns_str, column); 
             }
         }
         columns_str = columns_str.substr(0, columns_str.size() - 1);
 
         if (_query.size() == 0)
         {
-            _query = fmt::format("{} {} {} {}", commands::SELECT, commands::FROM, _table.name()); 
+            _query = fmt::format("{} {} {} {}", commands::SELECT, columns_str, commands::FROM, _table.name()); 
         }
         else
         {
-            _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, commands::FROM, _table.name()); 
+            _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, columns_str, commands::FROM, _table.name()); 
         }
         
         return *this; 
