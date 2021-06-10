@@ -108,24 +108,6 @@ namespace querycpp
         return *this; 
     }    
 
-    // query& query::GT(const std::string& lhs, const std::string rhs)
-    // {
-    //     _query = fmt::format("{} {} {} {}", _query, lhs, operators::GT, rhs);
-    //     return *this; 
-    // }
-    
-    query& query::LT(const std::string& lhs, const std::string rhs)
-    {
-        _query = fmt::format("{} {} {} {}", _query, lhs, operators::LT, rhs);
-        return *this; 
-    }
-    
-    query& query::EQ(const std::string& lhs, const std::string rhs)
-    {
-        _query = fmt::format("{} {} {} {}", _query, lhs, operators::EQ, rhs);
-        return *this;
-    }
-
     query& query::IN(const std::string& column)
     {
         _query = fmt::format("{} {} {}", _query, column, commands::IN);

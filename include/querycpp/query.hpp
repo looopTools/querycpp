@@ -43,9 +43,15 @@ public:
         return comparison_experssion(lhs, rhs, operators::GT); 
     }
 
-    
-    query& LT(const std::string& lhs, const std::string rhs);
-    query& EQ(const std::string& lhs, const std::string rhs);
+    template<typename T1, typename T2> query& LT(const T1 lhs, const T2 rhs)
+    {
+        return comparison_experssion(lhs, rhs, operators::LT); 
+    }
+
+    template<typename T1, typename T2> query& EQ(const T1 lhs, const T2 rhs)
+    {
+        return comparison_experssion(lhs, rhs, operators::EQ); 
+    }
 
     query& IN(const std::string& column);
     query& IN(const std::string& column, query& sub_query);
