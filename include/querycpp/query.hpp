@@ -1,9 +1,17 @@
 #ifndef QUERYCPP_QUERY_HPP
 #define QUERYCPP_QUERY_HPP
 
+#include "column.hpp"
 #include "table.hpp"
 
+#include "operators.hpp"
+
+#include <fmt/core.h>
+
+
 #include <string>
+
+#include <type_traits>
 
 namespace querycpp
 {
@@ -29,7 +37,13 @@ public:
     query& AND();
     query& OR();
 
-    query& GT(const std::string& lhs, const std::string rhs);
+    
+    template<typename T1, typename T2> query& GT(const T1 lhs, const T2 rhs)
+    {
+        return comparison_experssion(lhs, rhs, operators::GT); 
+    }
+
+    
     query& LT(const std::string& lhs, const std::string rhs);
     query& EQ(const std::string& lhs, const std::string rhs);
 
@@ -45,7 +59,43 @@ public:
     
 
     // Cleans current build query
-    void clean(); 
+    void clean();
+
+private:
+
+    template<typename T1, typename T2> query& comparison_experssion(const T1 lhs, const T2 rhs, const std::string& op)
+    {
+        std::string _lhs;
+        std::string _rhs; 
+
+        if constexpr (std::is_same<T1, std::string>::value)
+        {
+            _lhs = lhs; 
+        }
+        else if constexpr (std::is_same<T1, querycpp::column>::value)
+        {
+            _lhs = lhs.name();
+        }
+        else
+        {
+            _lhs = std::to_string(lhs);
+        }
+
+        if constexpr (std::is_same<T2, std::string>::value)
+        {
+            _rhs = rhs; 
+        }
+        else if constexpr (std::is_same<T2, querycpp::column>::value)
+        {
+            _rhs = rhs.name();
+        }
+        else
+        {
+            _lhs = std::to_string(lhs);
+        }
+        _query = fmt::format("{} {} {} {}", _query, _lhs, op, _rhs);
+        return *this; 
+    }
     
 private:
 

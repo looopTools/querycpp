@@ -1,9 +1,6 @@
 #include "query.hpp"
 #include "common.hpp" 
 #include "commands.hpp"
-#include "operators.hpp"
-
-#include <fmt/core.h>
 
 #include <sstream> 
 
@@ -111,11 +108,11 @@ namespace querycpp
         return *this; 
     }    
 
-    query& query::GT(const std::string& lhs, const std::string rhs)
-    {
-        _query = fmt::format("{} {} {} {}", _query, lhs, operators::GT, rhs);
-        return *this; 
-    }
+    // query& query::GT(const std::string& lhs, const std::string rhs)
+    // {
+    //     _query = fmt::format("{} {} {} {}", _query, lhs, operators::GT, rhs);
+    //     return *this; 
+    // }
     
     query& query::LT(const std::string& lhs, const std::string rhs)
     {

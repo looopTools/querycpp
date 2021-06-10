@@ -67,14 +67,14 @@ TEST(test_querycpp_query, test_select_where_gt)
 
     std::string EXPECTED = "SELECT * FROM test WHERE id > 3"; 
     
-    EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().GT("id", std::to_string(3)).str());
+    EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().GT(id, std::to_string(3)).str());
     query.clean();
     
     EXPECTED = "SELECT id, text FROM test WHERE id > 3";
 
     std::vector<std::string> _columns = {"id", "text"};
     
-    EXPECT_EQ(EXPECTED, query.SELECT(_columns).WHERE().GT("id", std::to_string(3)).str());
+    EXPECT_EQ(EXPECTED, query.SELECT(_columns).WHERE().GT(id, std::to_string(3)).str());
 }
 
 TEST(test_querycpp_query, test_select_where_lt)
