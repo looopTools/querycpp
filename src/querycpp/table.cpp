@@ -22,9 +22,11 @@ namespace querycpp
         return _columns; 
     }
     
-    void table::columns(std::vector<column>& columns)
+    void table::columns(const std::vector<column>& columns)
     {
         _columns = columns; 
     }
+
+    
     
 }
