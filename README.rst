@@ -58,6 +58,22 @@ After this you can build the system by executing
 
     python waf build 
 
+=============
+Documentation
+=============
+
+*NOTE:* Documentation is still a work in progress. But we believe in documentation and aim to fully document Query C++
+
+API Documentation can be generate by run `make documentation` or `python waf documentation`.
+The documentation will be generate in the folder `build/docs`.
+
+In addition to API documentation a manual can be found here: https://github.com/looopTools/querycpp-docs
+
+=============
+Examples
+=============
+
+Examples will be added to this project later
 
 =============
 Suported Data Types

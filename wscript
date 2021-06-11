@@ -61,3 +61,7 @@ def test(ctx):
     subprocess.call(['./build/test/test_table/test_table'], encoding='utf-8')
     subprocess.call(['./build/test/test_query/test_query'], encoding='utf-8')                
 
+
+def documentation(ctx):
+
+    subprocess.call(['doxygen', 'Doxyfile'])

@@ -26,7 +26,4 @@ namespace querycpp
     {
         _columns = columns; 
     }
-
-    
-    
 }

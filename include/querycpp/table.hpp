@@ -31,28 +31,32 @@ public:
     /// has_column identifies if a table contains a column
     /// If a std::string is provided as input param it will check based on name
     /// If a querycpp::column is provided the == operator will be used
-    /// @param value is a Template type which should be either std::string or querycpp::column
+    /// @param col is a Template type which should be either std::string or querycpp::column
     /// @return true if the table contains the column otherwise false 
     template<typename T> bool has_column(const T col)
     {
 
-        if constexpr (std::is_same<T, std::string>::value || std::is_same<T, column>::value)
+        bool constexpr is_supported = (std::is_same<T, std::string>::value || std::is_same<T, column>::value);
+        
+        if (!is_supported)
         {
             
             throw std::invalid_argument(fmt::format("col must be of type std::string or type querycpp::column. You provided a {}", typeid(T)));
         }
-        
-        if constexpr (std::is_same<T, std::string>::value)
+
+        bool constexpr is_string = std::is_same<T, std::string>::value;
+
+        if (is_string)
         {
             for (const auto& _col : _columns)
             {
                 if (_col.name() == col)
                 {
-                    return 0; 
+                    return true; 
                 }
             }
         }
-        else if constexpr (std::is_same<T, column>::value)
+        else
         {
             for (const auto& _col : _columns)
             {
@@ -62,10 +66,7 @@ public:
                 }
             }
         }
-        else
-        {
-            // todo throw exception type not supported
-        }
+        
         return false;
     }
     
