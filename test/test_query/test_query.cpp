@@ -136,6 +136,27 @@ TEST(test_querycpp_query, test_select_where_in_str_param_list)
     EXPECT_EQ(EXPECTED, query.SELECT(_columns).WHERE().IN("id", "13, 1337, 42").str());
 }
 
+TEST(test_querycpp_query, test_nested)
+{
+
+    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+
+    querycpp::column id2("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column num("num", querycpp::database::type::postgres::numerical::INTEGER, {querycpp::constraints::PRIMARY});
+    querycpp::table tbl2("tbl2", {id2, num});
+    querycpp::query query2(tbl2);
+
+    query2.SELECT("num");
+    query.SELECT("id").WHERE().IN("id", query2);
+                         
+
+    std::string EXPECTED = "SELECT id FROM test WHERE id IN (SELECT num FROM tbl2)"; 
+    
+    EXPECT_EQ(EXPECTED, query.str());    
+}
 
 
 int main(int argc, char **argv) {
