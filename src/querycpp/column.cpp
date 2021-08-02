@@ -8,7 +8,7 @@ namespace querycpp
     column::column(std::string name, const std::string& type, std::vector<std::string> constraints) : _name(name), _type(type), _constraints(constraints)
     {
     }
-
+    
     column::column(const column& old)
     {
         _name = old._name;
@@ -79,5 +79,13 @@ namespace querycpp
     bool column::is_length_type(const std::string& type) const
     {
         return type == (database::type::common::string::VARCHAR);
+    }
+
+    column& column::operator=(const column& other)
+    {
+        _name = other._name;
+        _type = other._type;
+        _constraints = other._constraints;
+        return *this; 
     }
 }

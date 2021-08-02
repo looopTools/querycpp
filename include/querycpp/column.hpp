@@ -28,6 +28,8 @@ public:
     std::string str() const;
 
     bool operator==(const column& other);
+    
+    column& operator=(const column& other);
 
 private:
 
