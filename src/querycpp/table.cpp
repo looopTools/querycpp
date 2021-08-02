@@ -1,4 +1,4 @@
-#include "table.hpp"
+#include "querycpp/table.hpp"
 
 #include <cstdint>
 

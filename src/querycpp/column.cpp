@@ -1,4 +1,4 @@
-#include "column.hpp"
+#include "querycpp/column.hpp"
 
 #include <sstream>
 #include <iostream>

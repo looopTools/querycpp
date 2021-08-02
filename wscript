@@ -30,8 +30,8 @@ def configure(cnf) :
 def build(bld):
 
     bld(name = '{!s}-includes'.format(APPNAME),
-        includes='./include/querycpp',
-        export_includes='./include/querycpp')
+        includes='./include/',
+        export_includes='./include/')
     
     bld.stlib(name = APPNAME,
         features = 'cxx cxxstlib',

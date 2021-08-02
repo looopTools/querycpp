@@ -1,6 +1,6 @@
-#include "query.hpp"
-#include "common.hpp" 
-#include "commands.hpp"
+#include "querycpp/query.hpp"
+#include "querycpp/common.hpp" 
+#include "querycpp/commands.hpp"
 
 #include <sstream> 
 
