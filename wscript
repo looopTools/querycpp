@@ -36,7 +36,7 @@ def build(bld):
     bld.stlib(name = APPNAME,
         features = 'cxx cxxstlib',
         target='{!s}'.format(APPNAME),
-        includes='../src',
+        includes='../include',
         lib = ['fmt'],
         source=bld.path.ant_glob('src/{!s}/**/*.cpp'.format(APPNAME)),
         use=['{!s}-includes'.format(APPNAME)]
