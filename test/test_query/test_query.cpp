@@ -215,6 +215,26 @@ TEST(test_querycpp_query, test_count_column)
     EXPECT_EQ(EXPECTED, query.str()); 
 }
 
+TEST(test_querycpp_query, test_exists_str)
+{
+    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+
+    std::string EXPECTED = "SELECT EXISTS(*) FROM test"; 
+
+    query.SELECT_EXISTS();
+
+    EXPECT_EQ(EXPECTED, query.str());
+    
+    query.clean();
+
+    query.SELECT_EXISTS(std::string("id")); 
+
+    EXPECTED = "SELECT EXISTS(id) FROM test";
+    EXPECT_EQ(EXPECTED, query.str());    
+}
 
 
 int main(int argc, char **argv) {

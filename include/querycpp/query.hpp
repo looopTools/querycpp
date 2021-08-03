@@ -36,6 +36,7 @@ public:
     // TODO: find a good way to implement:
     //       query& SELECT(std::map<std::string, std::string> columns_and_names);
 
+    query& SELECT_EXISTS(const std::string& column = "*");
 
     /// If param is a column or a string we assume it is a column name
     template<typename T> query& COUNT(T param)

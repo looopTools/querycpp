@@ -76,7 +76,7 @@ namespace querycpp
         }
         columns_str = columns_str.substr(0, columns_str.size() - 1);
 
-        if (_query.size() == 0)
+        if (_query.empty())
         {
             _query = fmt::format("{} {} {} {}", commands::SELECT, columns_str, commands::FROM, _table.name()); 
         }
@@ -85,6 +85,19 @@ namespace querycpp
             _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, columns_str, commands::FROM, _table.name()); 
         }
         
+        return *this; 
+    }
+
+    query& query::SELECT_EXISTS(const std::string& column)
+    {
+        if (_query.empty())
+        {
+            _query = fmt::format("{} {}{}{}{} {} {}", commands::SELECT, commands::EXISTS, common::symbols::LEFT_PARENTHESE, column, common::symbols::RIGHT_PARENTHESE, commands::FROM, _table.name());
+        }
+        else
+        {
+            _query = fmt::format("{} {} {}{}{}{} {} {}", _query, commands::SELECT, commands::EXISTS, common::symbols::LEFT_PARENTHESE, column, common::symbols::RIGHT_PARENTHESE, commands::FROM, _table.name());
+        }
         return *this; 
     }
 
