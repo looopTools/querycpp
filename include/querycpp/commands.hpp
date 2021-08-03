@@ -34,7 +34,11 @@ namespace querycpp::commands
     /// ORDER
     const std::string ORDER_BY = "ORDER BY";
     const std::string ASCENDING = "ASC";
-    const std::string DESCENDING = "DSC"; 
+    const std::string DESCENDING = "DSC";
+
+    /// COUNT and EXISTS
+    const std::string COUNT = "COUNT";
+    const std::string EXISTS = "EXISTS"; 
     
 }
 

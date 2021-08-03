@@ -4,6 +4,10 @@
 #include "column.hpp"
 #include "table.hpp"
 
+#include "querycpp/common.hpp" 
+#include "querycpp/commands.hpp"
+
+
 #include "operators.hpp"
 
 #include <fmt/core.h>
@@ -31,7 +35,39 @@ public:
     query& SELECT(const std::vector<std::string>& columns);
     // TODO: find a good way to implement:
     //       query& SELECT(std::map<std::string, std::string> columns_and_names);
+
+
+    /// If param is a column or a string we assume it is a column name
+    template<typename T> query& COUNT(T& param)
+    {
+
+        ///_query = fmt::format("{} {} {} {}", _query, _lhs, op, _rhs);
+        
+        if constexpr (std::is_same<T, std::string>::value)
+        {
+            _query = fmt::format("{} {}{}{}{}", commands::SELECT, commands::COUNT, common::symbols::LEFT_PARENTHESE,
+                                 param, common::symbols::RIGHT_PARENTHESE);
+            return *this; 
+            
+        }
+        else if constexpr (std::is_same<T, column>::value)
+        {
+            _query = fmt::format("{} {}{}{}{}", commands::SELECT, commands::COUNT, common::symbols::LEFT_PARENTHESE,
+                                 param.name(), common::symbols::RIGHT_PARENTHESE);
+            return *this; 
+        }
+        else if constexpr (std::is_same<T, query>::value)
+        {
+            _query = fmt::format("{} {}{}{}{}", commands::SELECT, commands::COUNT, common::symbols::LEFT_PARENTHESE,
+                                 param.str(), common::symbols::RIGHT_PARENTHESE);
+            return *this; 
+        }
+    }
+
     
+    query& EXISTS();        
+    query& EXISTS(query& other);
+        
     
     query& WHERE();
     query& AND();
@@ -97,7 +133,7 @@ private:
         }
         else
         {
-            _lhs = std::to_string(lhs);
+            _rhs = std::to_string(rhs);
         }
         _query = fmt::format("{} {} {} {}", _query, _lhs, op, _rhs);
         return *this; 

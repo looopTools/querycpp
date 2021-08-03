@@ -1,6 +1,4 @@
 #include "querycpp/query.hpp"
-#include "querycpp/common.hpp" 
-#include "querycpp/commands.hpp"
 
 #include <sstream> 
 
@@ -87,6 +85,18 @@ namespace querycpp
             _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, columns_str, commands::FROM, _table.name()); 
         }
         
+        return *this; 
+    }
+
+    query& query::EXISTS()
+    {
+        _query = fmt::format("{} {}", _query, commands::EXISTS);
+        return *this;
+    }
+        
+    query& query::EXISTS(query& other)
+    {
+        _query = fmt::format("{} {}{}{}{}", _query, commands::EXISTS, common::symbols::LEFT_PARENTHESE, other.str(), common::symbols::RIGHT_PARENTHESE);
         return *this; 
     }
 

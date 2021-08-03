@@ -158,6 +158,25 @@ TEST(test_querycpp_query, test_nested)
     EXPECT_EQ(EXPECTED, query.str());    
 }
 
+TEST(test_querycpp_query, test_exists_sub)
+{
+    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+    querycpp::query sub_query(tbl);
+
+    std::string EXPECTED = "SELECT id FROM test WHERE EXISTS(SELECT * FROM test WHERE id > 3)"; 
+
+    std::vector<std::string> _columns = {"id", "text"};
+
+    sub_query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().GT(id, std::string("3"));
+    query.SELECT(id.name()).WHERE().EXISTS(sub_query);
+    EXPECT_EQ(EXPECTED, query.str()); 
+    
+
+}
+
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
