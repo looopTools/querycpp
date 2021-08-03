@@ -173,9 +173,48 @@ TEST(test_querycpp_query, test_exists_sub)
     sub_query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().GT(id, std::string("3"));
     query.SELECT(id.name()).WHERE().EXISTS(sub_query);
     EXPECT_EQ(EXPECTED, query.str()); 
-    
-
 }
+
+
+TEST(test_querycpp_query, test_exists)
+{
+    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+
+    std::string EXPECTED = "SELECT id FROM test WHERE EXISTS"; 
+
+    query.SELECT(id.name()).WHERE().EXISTS();
+    EXPECT_EQ(EXPECTED, query.str()); 
+}
+
+TEST(test_querycpp_query, test_count_column_string)
+{
+    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+
+    std::string EXPECTED = "SELECT COUNT(id) FROM test"; 
+
+    query.COUNT(id.name());
+    EXPECT_EQ(EXPECTED, query.str()); 
+}
+
+TEST(test_querycpp_query, test_count_column)
+{
+    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+
+    std::string EXPECTED = "SELECT COUNT(id) FROM test"; 
+
+    query.COUNT(id);
+    EXPECT_EQ(EXPECTED, query.str()); 
+}
+
 
 
 int main(int argc, char **argv) {

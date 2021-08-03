@@ -38,28 +38,28 @@ public:
 
 
     /// If param is a column or a string we assume it is a column name
-    template<typename T> query& COUNT(T& param)
+    template<typename T> query& COUNT(T param)
     {
 
         ///_query = fmt::format("{} {} {} {}", _query, _lhs, op, _rhs);
         
         if constexpr (std::is_same<T, std::string>::value)
         {
-            _query = fmt::format("{} {}{}{}{}", commands::SELECT, commands::COUNT, common::symbols::LEFT_PARENTHESE,
-                                 param, common::symbols::RIGHT_PARENTHESE);
+            _query = fmt::format("{} {}{}{}{} {} {}", commands::SELECT, commands::COUNT, common::symbols::LEFT_PARENTHESE,
+                                 param, common::symbols::RIGHT_PARENTHESE, commands::FROM, _table.name());
             return *this; 
             
         }
         else if constexpr (std::is_same<T, column>::value)
         {
-            _query = fmt::format("{} {}{}{}{}", commands::SELECT, commands::COUNT, common::symbols::LEFT_PARENTHESE,
-                                 param.name(), common::symbols::RIGHT_PARENTHESE);
+            _query = fmt::format("{} {}{}{}{} {} {}", commands::SELECT, commands::COUNT, common::symbols::LEFT_PARENTHESE,
+                                 param.name(), common::symbols::RIGHT_PARENTHESE, commands::FROM, _table.name());
             return *this; 
         }
         else if constexpr (std::is_same<T, query>::value)
         {
-            _query = fmt::format("{} {}{}{}{}", commands::SELECT, commands::COUNT, common::symbols::LEFT_PARENTHESE,
-                                 param.str(), common::symbols::RIGHT_PARENTHESE);
+            _query = fmt::format("{} {}{}{}{} {} {}", commands::SELECT, commands::COUNT, common::symbols::LEFT_PARENTHESE,
+                                 param.str(), common::symbols::RIGHT_PARENTHESE, commands::FROM, _table.name());
             return *this; 
         }
     }
