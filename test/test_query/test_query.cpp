@@ -255,6 +255,28 @@ TEST(test_querycpp_query, test_insert)
     EXPECT_EQ(EXPECTED, query.str());    
 }
 
+TEST(test_querycpp_query, test_insert_values)
+{
+    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+
+    std::vector<std::vector<std::string>> values = {{"a", "b"}, {"c", "d"}}; 
+    
+    std::string EXPECTED = "INSERT INTO test (id, text) VALUES (a, b), (c, d)"; 
+
+    query.INSERT({id, text}, values);
+
+    EXPECT_EQ(EXPECTED, query.str());
+    
+    query.clean();
+
+    query.INSERT(values);
+    EXPECT_EQ(EXPECTED, query.str());    
+}
+
+
 
 
 int main(int argc, char **argv) {

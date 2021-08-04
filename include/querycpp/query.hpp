@@ -102,7 +102,9 @@ public:
 
     /// Inserts into all  
     query& INSERT();    
-        
+
+    query& INSERT(const std::vector<column>& columns, std::vector<std::vector<std::string>> values);
+    query& INSERT(std::vector<std::vector<std::string>> values);
 
     /// @param clean cleans the query string already build 
     std::string str(bool clean = false);
