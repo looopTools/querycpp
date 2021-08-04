@@ -38,7 +38,14 @@ namespace querycpp::commands
 
     /// COUNT and EXISTS
     const std::string COUNT = "COUNT";
-    const std::string EXISTS = "EXISTS"; 
+    const std::string EXISTS = "EXISTS";
+
+
+    /// INSERT RELEVANT
+    const std::string INSERT = "INSERT";
+    const std::string INTO = "INTO";
+    const std::string VALUES = "VALUES";
+        
     
 }
 

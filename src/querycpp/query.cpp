@@ -161,6 +161,37 @@ namespace querycpp
         return *this;   
     }
 
+    query& query::INSERT(const std::vector<column>& columns)
+    {
+        
+        std::stringstream ss;
+
+        for (const auto& column : columns)
+        {
+            ss << column.name() << ",";
+        }
+        auto columns_str  = ss.str();
+        columns_str = columns_str.substr(0, columns_str.length() - 1);
+
+        std::string tmp_query = fmt::format("{} {} {} {} {} {} {}", commands::INSERT, commands::INTO, commands::VALUES,
+                                            common::symbols::LEFT_PARENTHESE, columns_str, common::symbols::RIGHT_PARENTHESE);  
+        if (_query.empty())
+        {
+            _query = tmp_query; 
+        }
+        else
+        {
+            _query = fmt::format("{} {}", _query, tmp_query);
+        }
+        return *this; 
+    }
+
+    query& query::INSERT()
+    {
+        return INSERT(_table.columns()); 
+    }
+    
+
     std::string query::str(bool clean)
     {
         auto res = _query;

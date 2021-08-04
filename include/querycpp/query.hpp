@@ -94,8 +94,15 @@ public:
     query& IN(const std::string& column, query& sub_query);
     query& IN(const std::string& column, const std::string& params_list);     
 
+    
     query& BEGIN_NESTED();
-    query& END_NESTED();      
+    query& END_NESTED();
+
+    query& INSERT(const std::vector<column>& columns);
+
+    /// Inserts into all  
+    query& INSERT();    
+        
 
     /// @param clean cleans the query string already build 
     std::string str(bool clean = false);
