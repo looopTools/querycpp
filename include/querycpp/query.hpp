@@ -106,12 +106,14 @@ public:
     query& INSERT(const std::vector<column>& columns, std::vector<std::vector<std::string>> values);
     query& INSERT(std::vector<std::vector<std::string>> values);
 
+    query& DELETE(); 
+    
     /// @param clean cleans the query string already build 
-    std::string str(bool clean = false);
+    std::string str(bool clear_query = false);
     
 
     // Cleans current build query
-    void clean();
+    void clear();
 
 private:
 

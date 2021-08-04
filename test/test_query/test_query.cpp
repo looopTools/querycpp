@@ -29,7 +29,7 @@ TEST(test_querycpp_query, test_select)
     
     
     EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).str());
-    query.clean(); 
+    query.clear(); 
     
     EXPECTED = "SELECT id, text FROM test";
 
@@ -49,7 +49,7 @@ TEST(test_querycpp_query, test_select_where)
     std::string EXPECTED = "SELECT * FROM test WHERE"; 
     
     EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().str());
-    query.clean();
+    query.clear();
     
     EXPECTED = "SELECT id, text FROM test WHERE";
 
@@ -68,7 +68,7 @@ TEST(test_querycpp_query, test_select_where_gt)
     std::string EXPECTED = "SELECT * FROM test WHERE id > 3"; 
     
     EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().GT(id, std::to_string(3)).str());
-    query.clean();
+    query.clear();
     
     EXPECTED = "SELECT id, text FROM test WHERE id > 3";
 
@@ -87,7 +87,7 @@ TEST(test_querycpp_query, test_select_where_lt)
     std::string EXPECTED = "SELECT * FROM test WHERE id < 3"; 
     
     EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().LT(id, std::to_string(3)).str());
-    query.clean();
+    query.clear();
     
     EXPECTED = "SELECT id, text FROM test WHERE id < 3";
 
@@ -107,7 +107,7 @@ TEST(test_querycpp_query, test_select_where_in)
     std::string EXPECTED = "SELECT * FROM test WHERE id IN"; 
     
     EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().IN("id").str());
-    query.clean();
+    query.clear();
     
     EXPECTED = "SELECT id, text FROM test WHERE id IN";
 
@@ -127,7 +127,7 @@ TEST(test_querycpp_query, test_select_where_in_str_param_list)
     std::string EXPECTED = "SELECT * FROM test WHERE id IN ($1, $2, $3)"; 
     
     EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().IN("id", "$1, $2, $3").str());
-    query.clean();
+    query.clear();
     
     EXPECTED = "SELECT id, text FROM test WHERE id IN (13, 1337, 42)";
 
@@ -228,7 +228,7 @@ TEST(test_querycpp_query, test_exists_str)
 
     EXPECT_EQ(EXPECTED, query.str());
     
-    query.clean();
+    query.clear();
 
     query.SELECT_EXISTS(std::string("id")); 
 
@@ -249,7 +249,7 @@ TEST(test_querycpp_query, test_insert)
 
     EXPECT_EQ(EXPECTED, query.str());
     
-    query.clean();
+    query.clear();
 
     query.INSERT();
     EXPECT_EQ(EXPECTED, query.str());    
@@ -270,10 +270,27 @@ TEST(test_querycpp_query, test_insert_values)
 
     EXPECT_EQ(EXPECTED, query.str());
     
-    query.clean();
+    query.clear();
 
     query.INSERT(values);
     EXPECT_EQ(EXPECTED, query.str());    
+}
+
+
+TEST(test_querycpp_query, DELETE)
+{
+    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+
+
+    
+    std::string EXPECTED = "DELETE FROM test"; 
+
+    query.DELETE(); 
+
+    EXPECT_EQ(EXPECTED, query.str());
 }
 
 

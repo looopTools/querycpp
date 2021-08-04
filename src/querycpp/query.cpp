@@ -223,21 +223,36 @@ namespace querycpp
     {
         return INSERT(_table.columns(), values);
     }
+
+    query& query::DELETE()
+    {
+
+        if (_query.empty())
+        {
+            _query = fmt::format("{} {} {}", commands::DELETE, commands::FROM, _table.name()); 
+        }
+        else
+        {
+            _query = fmt::format("{} {} {} {}", _query, commands::DELETE, commands::FROM, _table.name()); 
+        }
+        
+        return *this; 
+    }
     
 
-    std::string query::str(bool clean)
+    std::string query::str(bool clear_query)
     {
         auto res = _query;
-        if (clean)
+        if (clear_query)
         {
-           _query = "";
+            clear();
         }
         return res; 
     }
 
-    void query::clean()
+    void query::clear()
     {
-        _query = ""; 
+        _query.clear(); 
     }
 
     
