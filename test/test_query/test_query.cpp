@@ -236,6 +236,26 @@ TEST(test_querycpp_query, test_exists_str)
     EXPECT_EQ(EXPECTED, query.str());    
 }
 
+TEST(test_querycpp_query, test_insert)
+{
+    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+
+    std::string EXPECTED = "INSERT INTO test (id, text) VALUES"; 
+
+    query.INSERT({id, text});
+
+    EXPECT_EQ(EXPECTED, query.str());
+    
+    query.clean();
+
+    query.INSERT();
+    EXPECT_EQ(EXPECTED, query.str());    
+}
+
+
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

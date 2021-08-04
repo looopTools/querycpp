@@ -168,13 +168,13 @@ namespace querycpp
 
         for (const auto& column : columns)
         {
-            ss << column.name() << ",";
+            ss << column.name() << ", ";
         }
         auto columns_str  = ss.str();
-        columns_str = columns_str.substr(0, columns_str.length() - 1);
+        columns_str = columns_str.substr(0, columns_str.length() - 2);
 
-        std::string tmp_query = fmt::format("{} {} {} {} {} {} {}", commands::INSERT, commands::INTO, commands::VALUES,
-                                            common::symbols::LEFT_PARENTHESE, columns_str, common::symbols::RIGHT_PARENTHESE);  
+        std::string tmp_query = fmt::format("{} {} {} {}{}{} {}", commands::INSERT, commands::INTO, _table.name(),
+                                            common::symbols::LEFT_PARENTHESE, columns_str, common::symbols::RIGHT_PARENTHESE, commands::VALUES);  
         if (_query.empty())
         {
             _query = tmp_query; 
