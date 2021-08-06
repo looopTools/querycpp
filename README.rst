@@ -121,10 +121,9 @@ Numerical
 Supported by
 =============  
 
-This project has recieved support from Aarhus Univeristy Centre for Digitalisation, Big Data, and Data Analytics `(DIGIT) <https://digit.au.dk/>`_ and the ScaleIoT project.
+This project has received support from Aarhus University Centre for Digitalisation, Big Data, and Data Analytics `(DIGIT) <https://digit.au.dk/>`_ and the ScaleIoT project.
 
-The project has recieved support from Aarhus University, Department of Electrical and Computer Engineering, group for Network Computing, Communications, and Storage `(NeXT <https://ece.au.dk/en/research/key-areas-in-research-and-development/communication-control-and-automation/network-computing-communications-and-storage/>)`_.  
-
+The project has received support from Aarhus University, Department of Electrical and Computer Engineering, the group for Network Computing, Communications, and Storage `(NeXT <https://ece.au.dk/en/research/key-areas-in-research-and-development/communication-control-and-automation/network-computing-communications-and-storage/>)`_.  
 
 =============
 Want to financially support the project? 
@@ -133,6 +132,5 @@ Want to financially support the project?
 **NOT ACTIVELY LOOKING FOR FINANCIAL SUPPORT**
 
 We are currently not actively looking for financial support for the project.
-However, we are looking for hardware to test and build on so we can expand the testing of QueryC++.
-If you can provide a server with: Ubuntu, Fedora, or Rocky Linux, then we are very interested in running a build and test here from time to time.
-
+However, we are looking for hardware to test and build on to expand the testing of QueryC++.
+If you can provide a server with Ubuntu, Fedora, or Rocky Linux, then we are very interested in running a build and test here from time to time.
