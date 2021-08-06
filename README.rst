@@ -121,4 +121,4 @@ Numerical
 Supported by
 =============  
 
-This project has recieved support from Aarhus Univeristy Centre for Digitalisation, Big Data, and Data Analytics `(DIGIT) https://digit.au.dk/`_.
+This project has recieved support from Aarhus Univeristy Centre for Digitalisation, Big Data, and Data Analytics `(DIGIT) <https://digit.au.dk/>`_.
