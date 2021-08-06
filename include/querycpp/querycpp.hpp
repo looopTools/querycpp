@@ -9,4 +9,4 @@
 #include "table.hpp"
 #include "query.hpp"
 
-#endif /*QUERYCPP_HPP/*
+#endif /*QUERYCPP_HPP*/
