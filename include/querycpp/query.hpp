@@ -24,26 +24,32 @@ class query
 
 public:
 
+    /// Setup the bases for a query, which is constructed from the provided table
+    /// @param table for which the query will be executed 
     query(const table table);
 
+    /// Constructs the CREATE statement for a table 
     /// @param if_not_exists add the IF NOT EXITS check to the create statement
     query& CREATE(bool if_not_exists = false);
 
+    /// Single column select statement
+    /// @param column is the name of the column or wildecard. Default is wilde card
     query& SELECT(const std::string& column = "*");
 
+    /// Multi column select
+    /// @param a collection of column names 
     /// @throws exception if a column in columns does not exist
     query& SELECT(const std::vector<std::string>& columns);
-    // TODO: find a good way to implement:
-    //       query& SELECT(std::map<std::string, std::string> columns_and_names);
 
+    /// Select exists single column
+    /// @param column is the name of the column or wilde card. Default is wilde card
     query& SELECT_EXISTS(const std::string& column = "*");
 
-    /// If param is a column or a string we assume it is a column name
+    /// Count number of eleements in database
+    /// @param param is either a column or the name of a column as string 
     template<typename T> query& COUNT(T param)
     {
-
-        ///_query = fmt::format("{} {} {} {}", _query, _lhs, op, _rhs);
-        
+        // If param is a column or a string we assume it is a column name        
         if constexpr (std::is_same<T, std::string>::value)
         {
             _query = fmt::format("{} {}{}{}{} {} {}", commands::SELECT, commands::COUNT, common::symbols::LEFT_PARENTHESE,
@@ -65,26 +71,44 @@ public:
         }
     }
 
-    
-    query& EXISTS();        
+
+    /// Starts EXISTS query
+    query& EXISTS();
+
+    /// Build exists query based on another query, this query is treaded as a sub query.
+    /// @param other is a sub query
     query& EXISTS(query& other);
         
-    
+
+    /// Starts WHERE clause
     query& WHERE();
+
+    /// Starts AND 
     query& AND();
+
+    /// Starts OR
     query& OR();
 
-    
+
+    /// Create a < experessen
+    /// @param lhs can be a column or a std::string
+    /// @param rhs can be a column or a std::string    
     template<typename T1, typename T2> query& GT(const T1 lhs, const T2 rhs)
     {
         return comparison_experssion(lhs, rhs, operators::GT); 
     }
 
+    /// Create a > experessen
+    /// @param lhs can be a column or a std::string
+    /// @param rhs can be a column or a std::string        
     template<typename T1, typename T2> query& LT(const T1 lhs, const T2 rhs)
     {
         return comparison_experssion(lhs, rhs, operators::LT); 
     }
 
+    /// Create a = experessen
+    /// @param lhs can be a column or a std::string
+    /// @param rhs can be a column or a std::string        
     template<typename T1, typename T2> query& EQ(const T1 lhs, const T2 rhs)
     {
         return comparison_experssion(lhs, rhs, operators::EQ); 
