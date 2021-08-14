@@ -14,9 +14,9 @@ TEST(test_querycpp_column, test_constructor)
     std::string name = "id";
     std::vector<std::string> constraints = {querycpp::constraints::PRIMARY};
 
-    querycpp::column c(name, querycpp::database::type::postgres::numerical::SERIAL); 
+    querycpp::column c(name, querycpp::type::postgres::numerical::SERIAL); 
     
-    querycpp::column column(name, querycpp::database::type::postgres::numerical::SERIAL, constraints);
+    querycpp::column column(name, querycpp::type::postgres::numerical::SERIAL, constraints);
 
     EXPECT_EQ(EXPECTED, column.str());     
 }
@@ -25,7 +25,7 @@ TEST(test_querycpp_column, test_varchar)
 {
     const std::string EXPECTED = "text VARCHAR(3)";
 
-    querycpp::column column("text", querycpp::database::type::common::string::VARCHAR, {"3"});
+    querycpp::column column("text", querycpp::type::common::string::VARCHAR, {"3"});
     
     EXPECT_EQ(EXPECTED, column.str()); 
 }

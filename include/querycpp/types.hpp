@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace querycpp::database::type::common
+namespace querycpp::type::common
 {
 
 namespace numerical
@@ -21,7 +21,7 @@ namespace string
 
 }
 
-namespace querycpp::database::type::postgres
+namespace querycpp::type::postgres
 {
 namespace numerical
 {

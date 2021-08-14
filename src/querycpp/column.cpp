@@ -78,7 +78,7 @@ namespace querycpp
 
     bool column::is_length_type(const std::string& type) const
     {
-        return type == (database::type::common::string::VARCHAR);
+        return type == (type::common::string::VARCHAR);
     }
 
     column& column::operator=(const column& other)

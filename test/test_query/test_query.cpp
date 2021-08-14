@@ -9,8 +9,8 @@
 
 TEST(test_querycpp_query, test_create)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl); 
 
@@ -20,8 +20,8 @@ TEST(test_querycpp_query, test_create)
 
 TEST(test_querycpp_query, test_select)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl); 
 
@@ -41,8 +41,8 @@ TEST(test_querycpp_query, test_select)
 
 TEST(test_querycpp_query, test_select_where)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl); 
 
@@ -60,8 +60,8 @@ TEST(test_querycpp_query, test_select_where)
 
 TEST(test_querycpp_query, test_select_where_gt)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl); 
 
@@ -79,8 +79,8 @@ TEST(test_querycpp_query, test_select_where_gt)
 
 TEST(test_querycpp_query, test_select_where_lt)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl); 
 
@@ -99,8 +99,8 @@ TEST(test_querycpp_query, test_select_where_lt)
 
 TEST(test_querycpp_query, test_select_where_in)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl); 
 
@@ -119,8 +119,8 @@ TEST(test_querycpp_query, test_select_where_in)
 
 TEST(test_querycpp_query, test_select_where_in_str_param_list)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl); 
 
@@ -139,13 +139,13 @@ TEST(test_querycpp_query, test_select_where_in_str_param_list)
 TEST(test_querycpp_query, test_nested)
 {
 
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl);
 
-    querycpp::column id2("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column num("num", querycpp::database::type::postgres::numerical::INTEGER, {querycpp::constraints::PRIMARY});
+    querycpp::column id2("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column num("num", querycpp::type::postgres::numerical::INTEGER, {querycpp::constraints::PRIMARY});
     querycpp::table tbl2("tbl2", {id2, num});
     querycpp::query query2(tbl2);
 
@@ -160,8 +160,8 @@ TEST(test_querycpp_query, test_nested)
 
 TEST(test_querycpp_query, test_exists_sub)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl);
     querycpp::query sub_query(tbl);
@@ -178,8 +178,8 @@ TEST(test_querycpp_query, test_exists_sub)
 
 TEST(test_querycpp_query, test_exists)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl);
 
@@ -191,8 +191,8 @@ TEST(test_querycpp_query, test_exists)
 
 TEST(test_querycpp_query, test_count_column_string)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl);
 
@@ -204,8 +204,8 @@ TEST(test_querycpp_query, test_count_column_string)
 
 TEST(test_querycpp_query, test_count_column)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl);
 
@@ -217,8 +217,8 @@ TEST(test_querycpp_query, test_count_column)
 
 TEST(test_querycpp_query, test_exists_str)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl);
 
@@ -238,8 +238,8 @@ TEST(test_querycpp_query, test_exists_str)
 
 TEST(test_querycpp_query, test_insert)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl);
 
@@ -257,8 +257,8 @@ TEST(test_querycpp_query, test_insert)
 
 TEST(test_querycpp_query, test_insert_values)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl);
 
@@ -279,8 +279,8 @@ TEST(test_querycpp_query, test_insert_values)
 
 TEST(test_querycpp_query, DELETE)
 {
-    querycpp::column id("id", querycpp::database::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::database::type::common::string::VARCHAR, {"2"});
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl);
 

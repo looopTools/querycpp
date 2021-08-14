@@ -1,7 +1,7 @@
 #ifndef QUERY_COLUMN_HPP
 #define QUERY_COLUMN_HPP
 
-#include "database_data_type.hpp"
+#include "types.hpp"
 
 #include <string>
 #include <vector>

@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
-#include <querycpp/database_data_type.hpp>
+#include <querycpp/types.hpp>
 
 TEST(test_database_data_types, type_to_string)
 {
-    EXPECT_EQ("NUMBER", querycpp::database::type_to_string(querycpp::database::data_type::common::numerical::NUMBER));
+    EXPECT_EQ("NUMBER", querycpp::type_to_string(querycpp::data_type::common::numerical::NUMBER));
 
-    EXPECT_EQ("BIGINT", querycpp::database::type_to_string(querycpp::database::data_type::common::numerical::BIG_INT));
+    EXPECT_EQ("BIGINT", querycpp::type_to_string(querycpp::data_type::common::numerical::BIG_INT));
 
-    EXPECT_EQ("VARCHAR", querycpp::database::type_to_string(querycpp::database::data_type::common::string::VARCHAR));
+    EXPECT_EQ("VARCHAR", querycpp::type_to_string(querycpp::data_type::common::string::VARCHAR));
 
-    EXPECT_EQ("SERIAL", querycpp::database::type_to_string(querycpp::database::data_type::postgres::numerical::SERIAL));
+    EXPECT_EQ("SERIAL", querycpp::type_to_string(querycpp::data_type::postgres::numerical::SERIAL));
 
 }
 
