@@ -18,7 +18,6 @@ namespace string
 {
     const std::string VARCHAR = "VARCHAR";
 }
-
 }
 
 namespace querycpp::type::postgres
