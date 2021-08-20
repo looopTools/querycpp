@@ -16,6 +16,7 @@ build:
   # install the necessary build tools when needed
   # before_script:
   #   - apt update && apt -y install make autoconf
+    - apt update && apt -y install libfmt-dev
   script:
     - mkdir build 
     - cd build
