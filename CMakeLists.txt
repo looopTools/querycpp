@@ -4,6 +4,7 @@ project(querycpp VERSION 1.0.0 DESCRIPTION "Query C++ SQL query builder")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -O3") 
 
 add_library(querycpp STATIC
     src/querycpp/column.cpp
