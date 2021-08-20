@@ -12,9 +12,9 @@ image: silkeh/clang
 
 build:
   stage: build
-    - apt update && apt -y install libfmt-dev
-  
+    
   script:
+    - apt update && apt -y install libfmt-dev
     - mkdir build 
     - cd build
     - cmake ..
