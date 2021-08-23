@@ -1,4 +1,10 @@
+#ifndef QUERYCPP_HELPERS_HPP
+#define QUERYCPP_HELPERS_HPP
+
+#include <querycpp/common.hpp>
 #include <querycpp/column.hpp>
+
+#include <fmt/core.h>
 
 #include <string>
 #include <cstdint>
@@ -72,7 +78,15 @@ namespace querycpp::helpers
     /// If the type of val is std::string or char it will be escaped using quote 
     template<typename T> std::string type_to_sql_str(T val)
     {
-        if (is_numerical(val))
+        if constexpr (std::is_same<T, char>::value || std::is_same<T, std::string>::value)
+        {
+            return fmt::format("{}{}{}", common::symbols::QUOTE, val, common::symbols::QUOTE); 
+        }
+        else if constexpr (std::is_same<T, column>::value)
+        {
+            return val.name();
+        }
+        else if (is_numerical(val))
         {
             return std::to_string(val); 
         }
@@ -80,3 +94,5 @@ namespace querycpp::helpers
         throw std::runtime_error("Cannot convert type to SQL safe str unsupported type");
     }    
 }
+
+#endif /* QUERYCPP_HELPERS_HPP */

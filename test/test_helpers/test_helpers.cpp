@@ -428,6 +428,27 @@ TEST(test_querycpp_helpers, test_type_to_sql_str_int_N)
     EXPECT_EQ(querycpp::helpers::type_to_sql_str(n), EXPECTED);    
 }
 
+TEST(test_querycpp_helpers, test_type_to_sql_str_char_types)
+{
+    std::string EXPECTED;
+
+    char a = 'a';
+    EXPECTED = "'a'";
+    EXPECT_EQ(querycpp::helpers::type_to_sql_str(a), EXPECTED);
+
+    std::string b = "we are testing";
+    EXPECTED = "'we are testing'";
+    EXPECT_EQ(querycpp::helpers::type_to_sql_str(b), EXPECTED);
+}
+
+TEST(test_querycpp_helpers, test_type_to_sql_str_column)
+{
+    std::string EXPECTED = "id";
+
+    querycpp::column col ("id", querycpp::type::postgres::numerical::SERIAL);
+    EXPECT_EQ(querycpp::helpers::type_to_sql_str(col), EXPECTED);
+}
+
 
 
 
