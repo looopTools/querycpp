@@ -1,0 +1,8 @@
+def build(bld):
+
+    bld(features = 'cxx cxxprogram',
+        target = 'test_helpers',
+        source = 'test_helpers.cpp',
+        lib = ['fmt'],
+        use = ['querycpp-test-includes', 'querycpp', 'gtest']
+    )

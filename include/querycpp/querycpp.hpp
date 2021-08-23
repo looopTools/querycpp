@@ -7,6 +7,8 @@
 #include "operators.hpp"
 #include "column.hpp"
 #include "table.hpp"
+#include "helpers.hpp"
 #include "query.hpp"
+
 
 #endif /*QUERYCPP_HPP*/
