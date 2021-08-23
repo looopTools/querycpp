@@ -9,7 +9,8 @@ namespace symbols
 {
     const std::string LEFT_PARENTHESE = "(";
     const std::string RIGHT_PARENTHESE = ")";
-    const std::string WILDECARD = "*"; 
+    const std::string WILDECARD = "*";
+    const std::string QUOTE = "'";
 }    
 }
 
