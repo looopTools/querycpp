@@ -215,6 +215,29 @@ TEST(test_querycpp_query, test_count_column)
     EXPECT_EQ(EXPECTED, query.str()); 
 }
 
+TEST(test_querycpp_query, test_count_column_column)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+
+    std::string EXPECTED = "COUNT(id)";
+    EXPECT_EQ(EXPECTED, query.COUNT_COLUMN(id));
+    query.clear();
+    
+    EXPECTED = "SELECT id, COUNT(id) FROM test"; 
+
+    query.SELECT({id.name(), query.COUNT_COLUMN(id)});
+    EXPECT_EQ(EXPECTED, query.str());
+    query.clear();
+    
+    query.SELECT({id.name(), query.COUNT_COLUMN(id.name())});
+    EXPECT_EQ(EXPECTED, query.str());    
+
+
+}
+
 TEST(test_querycpp_query, test_exists_str)
 {
     querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});

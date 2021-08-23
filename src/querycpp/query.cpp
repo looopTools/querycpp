@@ -58,11 +58,16 @@ namespace querycpp
         std::string columns_str = "";
         
         for (const auto& column : columns)
-        {
+        {            
             auto found = std::find(std::begin(table_columns), std::end(table_columns), column);
             if (found == std::end(table_columns))
             {
-                throw std::runtime_error(fmt::format("column: {} not found for table {}", column, _table.name())); 
+                // Potentially wrapped with command
+                auto cmd_stripped = strip_command_from_column_name(column);
+                if (std::find(std::begin(table_columns), std::end(table_columns), cmd_stripped) == std::end(table_columns))
+                {
+                    throw std::runtime_error(fmt::format("column: {} not found for table {}", column, _table.name()));
+                }
             }
 
             if (columns_str.size() == 0)
@@ -255,5 +260,13 @@ namespace querycpp
         _query.clear(); 
     }
 
-    
+    std::string query::strip_command_from_column_name(const std::string& col_with_cmd, const std::string& start, const std::string& end)
+    {
+        // +1 due to need for offset when using substr
+        auto _start = col_with_cmd.find(start) + 1;
+
+        // We need the length of the col name not the pos of end
+        auto _end = col_with_cmd.find(end) - _start;
+        return col_with_cmd.substr(_start, _end); 
+    }    
 }

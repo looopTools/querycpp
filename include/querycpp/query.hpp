@@ -69,6 +69,23 @@ public:
         }
     }
 
+    template<typename T> std::string COUNT_COLUMN(T col)
+    {
+        std::string pattern = commands::COUNT + "({})";
+        
+        if constexpr (std::is_same<T, std::string>::value)
+        {
+            return fmt::format(pattern, col);
+        }
+
+        if constexpr(std::is_same<T, column>::value)
+        {
+            return fmt::format(pattern, col.name()); 
+        }
+
+        throw std::runtime_error("Unsupported datatype for count column"); 
+    }
+
 
     /// Starts EXISTS query
     query& EXISTS();
@@ -172,6 +189,9 @@ private:
         _query = fmt::format("{} {} {} {}", _query, _lhs, op, _rhs);
         return *this; 
     }
+
+    std::string strip_command_from_column_name(const std::string& col_with_cmd, const std::string& start = common::symbols::LEFT_PARENTHESE,
+                                               const std::string& end = common::symbols::RIGHT_PARENTHESE);
     
 private:
 
