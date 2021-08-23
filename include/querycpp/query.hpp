@@ -7,11 +7,9 @@
 #include "querycpp/common.hpp" 
 #include "querycpp/commands.hpp"
 
-
-#include "operators.hpp"
+#include "querycpp/operators.hpp"
 
 #include <fmt/core.h>
-
 
 #include <string>
 
