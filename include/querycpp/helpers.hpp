@@ -10,15 +10,6 @@
 namespace querycpp::helpers
 {
 
-    /// If the type of val is std::string or char it will be escaped using quote 
-    template<typename T> std::string type_to_sql_str(T val)
-    {
-        if (is_numerical(val))
-        {
-            return std::to_string(val); 
-        }
-    }
-
     template<typename T> bool is_numerical(T val)
     {
 
@@ -75,9 +66,17 @@ namespace querycpp::helpers
             return true; 
         }
 
-        return false; 
-        
-
-        
+        return false;         
     }
+
+    /// If the type of val is std::string or char it will be escaped using quote 
+    template<typename T> std::string type_to_sql_str(T val)
+    {
+        if (is_numerical(val))
+        {
+            return std::to_string(val); 
+        }
+
+        throw std::runtime_error("Cannot convert type to SQL safe str unsupported type");
+    }    
 }

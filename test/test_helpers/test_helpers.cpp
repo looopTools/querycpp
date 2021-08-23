@@ -188,6 +188,33 @@ TEST(test_helpers, test_is_numerical_str)
     EXPECT_FALSE(querycpp::helpers::is_numerical(b));    
 }
 
+TEST(test_helpers, test_type_to_sql_str_int)
+{
+    std::string EXPECTED;
+    
+    int a = 10;
+    EXPECTED = "10";
+    EXPECT_EQ(querycpp::helpers::type_to_sql_str(a), EXPECTED);
+
+    signed b = 1337;
+    EXPECTED = "1337";
+    EXPECT_EQ(querycpp::helpers::type_to_sql_str(b), EXPECTED);        
+    
+    unsigned c = 42;
+    EXPECTED = "42";
+    EXPECT_EQ(querycpp::helpers::type_to_sql_str(c), EXPECTED);            
+
+
+    signed int d = 16;
+    EXPECTED = "16";
+    EXPECT_EQ(querycpp::helpers::type_to_sql_str(d), EXPECTED);            
+
+    unsigned int e = 74;
+    EXPECTED = "74";
+    EXPECT_EQ(querycpp::helpers::type_to_sql_str(e), EXPECTED);            
+
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
