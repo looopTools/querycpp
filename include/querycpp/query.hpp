@@ -1,11 +1,13 @@
 #ifndef QUERYCPP_QUERY_HPP
 #define QUERYCPP_QUERY_HPP
 
-#include "column.hpp"
-#include "table.hpp"
+#include "querycpp/column.hpp"
+#include "querycpp/table.hpp"
 
 #include "querycpp/common.hpp" 
 #include "querycpp/commands.hpp"
+
+#include "querycpp/helpers.hpp"
 
 #include "querycpp/operators.hpp"
 
@@ -133,7 +135,24 @@ public:
     query& IN(const std::string& column, query& sub_query);
     query& IN(const std::string& column, const std::string& params_list);
 
+    template<typename T>
+    query& IN(const column column, const std::vector<T> params)
+    {
+        std::string params_list;
 
+        for (const T& param : params)
+        {
+            params_list = fmt::format("{}{}, ", params_list, helpers::type_to_sql_str(param));
+        }
+
+        params_list = params_list.substr(0, params_list.length() - 2); 
+
+        
+        _query = fmt::format("{} {} {} {}{}{}", _query, column.name(), commands::IN,
+                             common::symbols::LEFT_PARENTHESE, params_list, common::symbols::RIGHT_PARENTHESE);
+        return *this;
+        
+    }
 
     
     query& BEGIN_NESTED();
