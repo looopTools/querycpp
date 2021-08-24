@@ -3,6 +3,7 @@
 
 #include <querycpp/common.hpp>
 #include <querycpp/column.hpp>
+#include <querycpp/sql_string.hpp>
 
 #include <fmt/core.h>
 
@@ -81,6 +82,10 @@ namespace querycpp::helpers
         if constexpr (std::is_same<T, char>::value || std::is_same<T, std::string>::value)
         {
             return fmt::format("{}{}{}", common::symbols::QUOTE, val, common::symbols::QUOTE); 
+        }
+        else if constexpr(std::is_same<T, sql_string>::value)
+        {
+            return val.str();
         }
         else if constexpr (std::is_same<T, column>::value)
         {

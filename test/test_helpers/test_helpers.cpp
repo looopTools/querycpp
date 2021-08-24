@@ -449,6 +449,14 @@ TEST(test_querycpp_helpers, test_type_to_sql_str_column)
     EXPECT_EQ(querycpp::helpers::type_to_sql_str(col), EXPECTED);
 }
 
+TEST(test_querycpp_helpers, test_type_to_sql_str_sql_string)
+{
+    std::string EXPECTED = "'test'";
+
+    querycpp::sql_string str("test");
+    EXPECT_EQ(querycpp::helpers::type_to_sql_str(str), EXPECTED);
+}
+
 
 
 

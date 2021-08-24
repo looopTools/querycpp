@@ -131,7 +131,9 @@ public:
 
     query& IN(const std::string& column);
     query& IN(const std::string& column, query& sub_query);
-    query& IN(const std::string& column, const std::string& params_list);     
+    query& IN(const std::string& column, const std::string& params_list);
+
+
 
     
     query& BEGIN_NESTED();
