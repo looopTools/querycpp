@@ -1,0 +1,8 @@
+def build(bld):
+
+    bld(features = 'cxx cxxprogram',
+        target = 'test_sql_string',
+        source = 'test_sql_string.cpp',
+        lib = ["fmt"], 
+        use = ['querycpp-test-includes', 'querycpp', 'gtest']
+    )
