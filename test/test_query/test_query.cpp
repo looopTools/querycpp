@@ -348,6 +348,51 @@ TEST(test_querycpp_query, DELETE)
 }
 
 
+TEST(test_querycpp_query, group_by_column)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+    
+    std::string EXPECTED = "SELECT * FROM test GROUP BY id"; 
+
+    query.SELECT().GROUP_BY(id); 
+
+    EXPECT_EQ(EXPECTED, query.str());
+}
+
+TEST(test_querycpp_query, group_by_str)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+    
+    std::string EXPECTED = "SELECT * FROM test GROUP BY id"; 
+
+    query.SELECT().GROUP_BY(std::string("id")); 
+
+    EXPECT_EQ(EXPECTED, query.str());
+}
+
+TEST(test_querycpp_query, group_by_char_ptr)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+    
+    std::string EXPECTED = "SELECT * FROM test GROUP BY id"; 
+
+    char* id_char_ptr = "id";
+    
+    query.SELECT().GROUP_BY(std::string(id_char_ptr)); 
+
+    EXPECT_EQ(EXPECTED, query.str());
+}
+
+
 
 
 int main(int argc, char **argv) {

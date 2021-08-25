@@ -6,7 +6,7 @@ AR = ar
 
 LIB_NAME = libquerycpp
 
-INCLUDE_FLAGS = -I./include/querycpp
+INCLUDE_FLAGS = -I./include/
 
 SRC_DIR = src/querycpp/
 

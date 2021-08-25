@@ -33,6 +33,7 @@ namespace querycpp::commands
 
     /// ORDER
     const std::string ORDER_BY = "ORDER BY";
+    const std::string GROUP_BY = "GROUP BY";
     const std::string ASCENDING = "ASC";
     const std::string DESCENDING = "DSC";
 

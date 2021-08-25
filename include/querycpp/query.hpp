@@ -135,8 +135,7 @@ public:
     query& IN(const std::string& column, query& sub_query);
     query& IN(const std::string& column, const std::string& params_list);
 
-    template<typename T>
-    query& IN(const column column, const std::vector<T> params)
+    template<typename T> query& IN(const column column, const std::vector<T> params)
     {
         std::string params_list;
 
@@ -166,7 +165,34 @@ public:
     query& INSERT(const std::vector<column>& columns, std::vector<std::vector<std::string>> values);
     query& INSERT(std::vector<std::vector<std::string>> values);
 
-    query& DELETE(); 
+    query& DELETE();
+
+    /// Group by 
+    template<typename T> query& GROUP_BY(T val)
+    {
+        std::string group_by_col;
+
+        if constexpr (std::is_same<T, std::string>::value)
+        {
+            group_by_col = val;
+        }
+        else if constexpr (std::is_same<T, char*>::value)
+        {
+            group_by_col = std::string(val); 
+        }
+        else if constexpr (std::is_same<T, column>::value)
+        {
+            group_by_col = val.name();
+        }
+        else
+        {
+            throw std::runtime_error("Unsupported type for group by"); 
+        }
+        
+        _query = fmt::format("{} {} {}", _query, commands::GROUP_BY, group_by_col); 
+        
+        return *this;
+    }
     
     /// @param clean cleans the query string already build 
     std::string str(bool clear_query = false);
