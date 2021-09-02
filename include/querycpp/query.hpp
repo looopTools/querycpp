@@ -36,10 +36,50 @@ public:
     /// @param column is the name of the column or wildecard. Default is wilde card
     query& SELECT(const std::string& column = "*");
 
-    /// Multi column select
-    /// @param a collection of column names 
-    /// @throws exception if a column in columns does not exist
-    query& SELECT(const std::vector<std::string>& columns);
+    template<typename T> query& SELECT(const std::vector<T>& columns)
+    {
+        std::string columns_str = "";
+
+        for (const auto column : columns)
+        {
+            columns_str = fmt::format("{}{}, ", columns_str, column_as_str(column));
+        }
+
+        columns_str = columns_str.substr(0, columns_str.length() - 2);
+        
+        if (_query.empty())
+        {
+            _query = fmt::format("{} {} {} {}", commands::SELECT, columns_str, commands::FROM, _table.name());
+        }
+        else
+        {
+            _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, columns_str, commands::FROM, _table.name());
+        }
+        return *this;        
+    }
+
+    template<typename... T>query& SELECT(T... columns)
+    {
+        auto columns_str = columns_to_str(columns...);
+
+        if (columns_str.empty())
+        {
+            return *this;
+        }
+
+        if (_query.empty())
+        {
+            _query = fmt::format("{} {} {} {}", commands::SELECT, columns_str, commands::FROM, _table.name());
+        }
+        else
+        {
+            _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, columns_str, commands::FROM, _table.name());
+        }
+        return *this;
+            
+
+        
+    }
 
     /// Select exists single column
     /// @param column is the name of the column or wilde card. Default is wilde card
@@ -176,10 +216,6 @@ public:
         {
             group_by_col = val;
         }
-        else if constexpr (std::is_same<T, char*>::value)
-        {
-            group_by_col = std::string(val); 
-        }
         else if constexpr (std::is_same<T, column>::value)
         {
             group_by_col = val.name();
@@ -239,6 +275,39 @@ private:
 
     std::string strip_command_from_column_name(const std::string& col_with_cmd, const std::string& start = common::symbols::LEFT_PARENTHESE,
                                                const std::string& end = common::symbols::RIGHT_PARENTHESE);
+
+
+    std::string columns_to_str()
+    {
+        return "";
+    }
+    
+    template<typename T1, typename... T2> std::string columns_to_str(const T1& col, const T2&... columns)
+    {
+
+        
+        std::string result = fmt::format("{}, {}", column_as_str(col), columns_to_str(columns...));
+        // Replace return with the following when C++20 update happens
+
+        return result.at(result.length() - 1) == ' ' ? result.substr(0, result.length() - 2) : result;
+    }
+
+    template<typename T> std::string column_as_str(const T& col)
+    {
+        if constexpr (std::is_same<T, std::string>::value)
+        {
+            return  col;
+        }
+        else if constexpr (std::is_same<T, column>::value)
+        {
+            return col.name();
+        }
+        else
+        {
+            throw std::runtime_error("Unsupported type for column / column name");
+        }
+
+    }
     
 private:
 
