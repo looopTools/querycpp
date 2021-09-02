@@ -39,6 +39,28 @@ TEST(test_querycpp_query, test_select)
     EXPECT_EQ(EXPECTED, query.SELECT(_columns).str());
 }
 
+TEST(test_querycpp_query, test_select_template)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl); 
+
+    std::string EXPECTED = "SELECT id, text FROM test"; 
+
+    std::string id_str = id.name();
+    std::string text_str = text.name();
+
+        
+    EXPECT_EQ(EXPECTED, query.SELECT(id_str, text_str).str());
+    query.clear(); 
+    
+
+    EXPECT_EQ(EXPECTED, query.SELECT(id.name(), text.name()).str());
+}
+
+
+
 TEST(test_querycpp_query, test_select_where)
 {
     querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
@@ -180,8 +202,8 @@ TEST(test_querycpp_query, test_nested)
     querycpp::table tbl2("tbl2", {id2, num});
     querycpp::query query2(tbl2);
 
-    query2.SELECT("num");
-    query.SELECT("id").WHERE().IN("id", query2);
+    query2.SELECT(num.name());
+    query.SELECT(id.name()).WHERE().IN("id", query2);
                          
 
     std::string EXPECTED = "SELECT id FROM test WHERE id IN (SELECT num FROM tbl2)"; 
@@ -259,11 +281,13 @@ TEST(test_querycpp_query, test_count_column_column)
     
     EXPECTED = "SELECT id, COUNT(id) FROM test"; 
 
-    query.SELECT({id.name(), query.COUNT_COLUMN(id)});
+    std::vector<std::string> vec = {id.name(), query.COUNT_COLUMN(id)};
+    query.SELECT(vec);
     EXPECT_EQ(EXPECTED, query.str());
     query.clear();
-    
-    query.SELECT({id.name(), query.COUNT_COLUMN(id.name())});
+
+    vec = {id.name(), query.COUNT_COLUMN(id.name())}; 
+    query.SELECT(vec);
     EXPECT_EQ(EXPECTED, query.str());    
 
 
@@ -375,23 +399,6 @@ TEST(test_querycpp_query, group_by_str)
 
     EXPECT_EQ(EXPECTED, query.str());
 }
-
-TEST(test_querycpp_query, group_by_char_ptr)
-{
-    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
-    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
-    querycpp::table tbl("test", {id, text});
-    querycpp::query query(tbl);
-    
-    std::string EXPECTED = "SELECT * FROM test GROUP BY id"; 
-
-    char* id_char_ptr = "id";
-    
-    query.SELECT().GROUP_BY(std::string(id_char_ptr)); 
-
-    EXPECT_EQ(EXPECTED, query.str());
-}
-
 
 
 

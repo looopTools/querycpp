@@ -47,51 +47,6 @@ namespace querycpp
         return *this; 
     }
 
-    query& query::SELECT(const std::vector<std::string>& columns)
-    {
-        std::vector<std::string> table_columns;
-        for (const auto& column : _table.columns())
-        {
-            table_columns.emplace_back(column.name()); 
-        }
-
-        std::string columns_str = "";
-        
-        for (const auto& column : columns)
-        {            
-            auto found = std::find(std::begin(table_columns), std::end(table_columns), column);
-            if (found == std::end(table_columns))
-            {
-                // Potentially wrapped with command
-                auto cmd_stripped = strip_command_from_column_name(column);
-                if (std::find(std::begin(table_columns), std::end(table_columns), cmd_stripped) == std::end(table_columns))
-                {
-                    throw std::runtime_error(fmt::format("column: {} not found for table {}", column, _table.name()));
-                }
-            }
-
-            if (columns_str.size() == 0)
-            {
-                columns_str = fmt::format("{},", column); 
-            }
-            else
-            {
-                columns_str = fmt::format("{} {},", columns_str, column); 
-            }
-        }
-        columns_str = columns_str.substr(0, columns_str.size() - 1);
-
-        if (_query.empty())
-        {
-            _query = fmt::format("{} {} {} {}", commands::SELECT, columns_str, commands::FROM, _table.name()); 
-        }
-        else
-        {
-            _query = fmt::format("{} {} {} {} {}", _query, commands::SELECT, columns_str, commands::FROM, _table.name()); 
-        }
-        
-        return *this; 
-    }
 
     query& query::SELECT_EXISTS(const std::string& column)
     {
