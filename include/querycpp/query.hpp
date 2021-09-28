@@ -171,9 +171,47 @@ public:
         return comparison_experssion(lhs, rhs, operators::EQ); 
     }
 
-    query& IN(const std::string& column);
-    query& IN(const std::string& column, query& sub_query);
-    query& IN(const std::string& column, const std::string& params_list);
+    template<typename T> query& IN(const T& col)
+    {
+        if constexpr (std::is_same<T, std::string>::value)
+        {
+            _query = fmt::format("{} {} {}", _query, col, commands::IN);
+        }
+        else if constexpr (std::is_same<T, column>::value)
+        {
+            _query = fmt::format("{} {} {}", _query, col.name(), commands::IN);            
+        }
+        else
+        {
+            throw std::runtime_error("Unsupported type for SELECT IN");
+        }
+            
+        return *this;
+    }
+
+    /// @param params can be either of type query or std::string where a query will be used as a subquerry, and if string it is a comma seperated list (don't add () we do that for you)
+    template<typename T, typename T2> query& IN(const T& col, T2& params)
+    {
+        IN(col);
+
+        if constexpr (std::is_same<T2, std::string>::value)
+        {
+            _query = fmt::format("{} {}{}{}", _query, common::symbols::LEFT_PARENTHESE,
+                                 params, common::symbols::RIGHT_PARENTHESE);            
+        }
+        else if constexpr (std::is_same<T2, query>::value)
+        {
+            _query = fmt::format("{} {}{}{}", _query, common::symbols::LEFT_PARENTHESE,
+                                 params.str(), common::symbols::RIGHT_PARENTHESE);
+        }
+        else
+        {
+            throw std::runtime_error("Unsupported type for subquery");
+        }
+            
+        return *this;
+            
+    }
 
     template<typename T> query& IN(const column column, const std::vector<T> params)
     {

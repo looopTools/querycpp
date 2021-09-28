@@ -127,15 +127,35 @@ TEST(test_querycpp_query, test_select_where_in)
     querycpp::query query(tbl); 
 
     std::string EXPECTED = "SELECT * FROM test WHERE id IN"; 
-    
-    EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().IN("id").str());
+
+    std::string col_name = "id";
+    EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().IN(col_name).str());
     query.clear();
     
     EXPECTED = "SELECT id, text FROM test WHERE id IN";
 
     std::vector<std::string> _columns = {"id", "text"};
     
-    EXPECT_EQ(EXPECTED, query.SELECT(_columns).WHERE().IN("id").str());
+    EXPECT_EQ(EXPECTED, query.SELECT(_columns).WHERE().IN(col_name).str());
+}
+
+TEST(test_querycpp_query, test_select_where_in_column)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl); 
+
+    std::string EXPECTED = "SELECT * FROM test WHERE id IN"; 
+
+    EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().IN(id).str());
+    query.clear();
+    
+    EXPECTED = "SELECT id, text FROM test WHERE id IN";
+
+    std::vector<std::string> _columns = {"id", "text"};
+    
+    EXPECT_EQ(EXPECTED, query.SELECT(_columns).WHERE().IN(id).str());
 }
 
 
@@ -147,15 +167,39 @@ TEST(test_querycpp_query, test_select_where_in_str_param_list)
     querycpp::query query(tbl); 
 
     std::string EXPECTED = "SELECT * FROM test WHERE id IN ($1, $2, $3)"; 
-    
-    EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().IN("id", "$1, $2, $3").str());
+
+    std::string col_name = "id";
+    std::string param_list = "$1, $2, $3";
+    EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().IN(col_name, param_list).str());
     query.clear();
     
     EXPECTED = "SELECT id, text FROM test WHERE id IN (13, 1337, 42)";
 
     std::vector<std::string> _columns = {"id", "text"};
+
+    param_list = "13, 1337, 42";
+    EXPECT_EQ(EXPECTED, query.SELECT(_columns).WHERE().IN(col_name, param_list).str());
+}
+
+TEST(test_querycpp_query, test_select_where_in_column_str_param_list)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl); 
+
+    std::string EXPECTED = "SELECT * FROM test WHERE id IN ($1, $2, $3)"; 
+
+    std::string param_list = "$1, $2, $3";
+    EXPECT_EQ(EXPECTED, query.SELECT(querycpp::common::symbols::WILDECARD).WHERE().IN(id, param_list).str());
+    query.clear();
     
-    EXPECT_EQ(EXPECTED, query.SELECT(_columns).WHERE().IN("id", "13, 1337, 42").str());
+    EXPECTED = "SELECT id, text FROM test WHERE id IN (13, 1337, 42)";
+
+    std::vector<std::string> _columns = {"id", "text"};
+
+    param_list = "13, 1337, 42";
+    EXPECT_EQ(EXPECTED, query.SELECT(_columns).WHERE().IN(id, param_list).str());
 }
 
 TEST(test_querycpp_query, test_select_where_in_vector_param_list)
@@ -202,8 +246,9 @@ TEST(test_querycpp_query, test_nested)
     querycpp::table tbl2("tbl2", {id2, num});
     querycpp::query query2(tbl2);
 
+    std::string col_name = "id";
     query2.SELECT(num.name());
-    query.SELECT(id.name()).WHERE().IN("id", query2);
+    query.SELECT(id.name()).WHERE().IN(col_name, query2);
                          
 
     std::string EXPECTED = "SELECT id FROM test WHERE id IN (SELECT num FROM tbl2)"; 
