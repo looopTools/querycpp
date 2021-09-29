@@ -15,6 +15,8 @@
 
 #include <string>
 
+#include <tuple>
+
 #include <type_traits>
 
 namespace querycpp
@@ -31,6 +33,8 @@ public:
     /// Constructs the CREATE statement for a table 
     /// @param if_not_exists add the IF NOT EXITS check to the create statement
     query& CREATE(bool if_not_exists = false);
+
+    query& CREATE(const std::vector<std::tuple<column, table, column>> references, const bool if_not_exists = false);
 
     /// Single column select statement
     /// @param column is the name of the column or wildecard. Default is wilde card

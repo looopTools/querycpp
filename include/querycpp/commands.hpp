@@ -46,6 +46,9 @@ namespace querycpp::commands
     const std::string INSERT = "INSERT";
     const std::string INTO = "INTO";
     const std::string VALUES = "VALUES";
+
+    const std::string FOREING_KEY = "FOREING KEY";
+    const std::string REFERENCES = "REFERENCES";
         
     
 }
