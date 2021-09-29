@@ -18,6 +18,103 @@ TEST(test_querycpp_query, test_create)
     EXPECT_EQ(EXPECTED, query.CREATE().str()); 
 }
 
+TEST(test_querycpp_query, test_create_exists)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl); 
+
+    std::string EXPECTED = "CREATE IF NOT EXISTS TABLE test (id SERIAL PRIMARY KEY, text VARCHAR(2))";
+    EXPECT_EQ(EXPECTED, query.CREATE(true).str()); 
+}
+
+TEST(test_querycpp_query, test_create_references)
+{
+
+    querycpp::column id_ref("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::table tbl_ref("ref_tbl", {id_ref});
+    
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column idx("idx", querycpp::type::postgres::numerical::SERIAL);    
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, idx, text});
+    querycpp::query query(tbl); 
+
+    std::vector<std::tuple<querycpp::column, querycpp::table, querycpp::column>> references;
+
+    auto test_tuple = std::make_tuple(idx, tbl_ref, id_ref);
+    references.emplace_back(test_tuple);
+    
+    std::string EXPECTED = "CREATE TABLE test (id SERIAL PRIMARY KEY, idx SERIAL, text VARCHAR(2), FOREING KEY (idx) REFERENCES ref_tbl(id))";
+    EXPECT_EQ(EXPECTED, query.CREATE(references).str()); 
+}
+
+TEST(test_querycpp_query, test_create_multiple_references)
+{
+
+    querycpp::column id_ref("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::table tbl_ref("ref_tbl", {id_ref});
+    
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column idx("idx", querycpp::type::postgres::numerical::SERIAL);    
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, idx, text});
+    querycpp::query query(tbl); 
+
+    std::vector<std::tuple<querycpp::column, querycpp::table, querycpp::column>> references;
+
+    auto test_tuple = std::make_tuple(idx, tbl_ref, id_ref);
+    references.emplace_back(test_tuple);
+    references.emplace_back(test_tuple);    
+    
+    std::string EXPECTED = "CREATE TABLE test (id SERIAL PRIMARY KEY, idx SERIAL, text VARCHAR(2), FOREING KEY (idx) REFERENCES ref_tbl(id), FOREING KEY (idx) REFERENCES ref_tbl(id))";
+    EXPECT_EQ(EXPECTED, query.CREATE(references).str()); 
+}
+
+TEST(test_querycpp_query, test_create_references_if_not_exists)
+{
+
+    querycpp::column id_ref("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::table tbl_ref("ref_tbl", {id_ref});
+    
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column idx("idx", querycpp::type::postgres::numerical::SERIAL);    
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, idx, text});
+    querycpp::query query(tbl); 
+
+    std::vector<std::tuple<querycpp::column, querycpp::table, querycpp::column>> references;
+
+    auto test_tuple = std::make_tuple(idx, tbl_ref, id_ref);
+    references.emplace_back(test_tuple);
+    
+    std::string EXPECTED = "CREATE IF NOT EXISTS TABLE test (id SERIAL PRIMARY KEY, idx SERIAL, text VARCHAR(2), FOREING KEY (idx) REFERENCES ref_tbl(id))";
+    EXPECT_EQ(EXPECTED, query.CREATE(references, true).str()); 
+}
+
+TEST(test_querycpp_query, test_create_multiple_references_if_not_exists)
+{
+
+    querycpp::column id_ref("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::table tbl_ref("ref_tbl", {id_ref});
+    
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column idx("idx", querycpp::type::postgres::numerical::SERIAL);    
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, idx, text});
+    querycpp::query query(tbl); 
+
+    std::vector<std::tuple<querycpp::column, querycpp::table, querycpp::column>> references;
+
+    auto test_tuple = std::make_tuple(idx, tbl_ref, id_ref);
+    references.emplace_back(test_tuple);
+    references.emplace_back(test_tuple);    
+    
+    std::string EXPECTED = "CREATE IF NOT EXISTS TABLE test (id SERIAL PRIMARY KEY, idx SERIAL, text VARCHAR(2), FOREING KEY (idx) REFERENCES ref_tbl(id), FOREING KEY (idx) REFERENCES ref_tbl(id))";
+    EXPECT_EQ(EXPECTED, query.CREATE(references, true).str()); 
+}
+
 TEST(test_querycpp_query, test_select)
 {
     querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});

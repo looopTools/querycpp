@@ -13,6 +13,8 @@ class column
 {
 public:
 
+    column() = default;
+    
     /// column constructor
     /// Currently if type = VARCHAR then first contraint is the length
     /// @param name is the name of the column

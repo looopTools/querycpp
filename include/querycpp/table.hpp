@@ -20,6 +20,8 @@ class table
 
 public:
 
+    table() = default;
+
     table(const std::string& name, const std::vector<column>& columns);
 
     std::string name() const;

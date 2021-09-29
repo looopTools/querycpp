@@ -34,6 +34,42 @@ namespace querycpp
         return *this; 
     }
 
+    query& query::CREATE(const std::vector<std::tuple<column, table, column>> references, const bool if_not_exists)
+    {
+
+        CREATE(if_not_exists);
+        
+        std::stringstream reference_stream;
+
+        for (const auto& reference : references)
+        {
+            column loc_col;
+            table ref_tbl;
+            column ref_col;
+
+            std::tie(loc_col, ref_tbl, ref_col) = reference; 
+                
+            reference_stream << fmt::format("{} {}{}{} {} {}{}{}{}, ",
+                                            commands::FOREING_KEY, common::symbols::LEFT_PARENTHESE,
+                                            loc_col.name(),
+                                            common::symbols::RIGHT_PARENTHESE,
+                                            commands::REFERENCES,
+                                            ref_tbl.name(),
+                                            common::symbols::LEFT_PARENTHESE,
+                                            ref_col.name(),
+                                            common::symbols::RIGHT_PARENTHESE);
+        }
+
+        auto reference_str = reference_stream.str();
+        reference_str = reference_str.substr(0, reference_str.length() - 2);
+
+        _query = fmt::format("{}, {}{}", _query.substr(0, _query.length() - 1),
+                             reference_str, common::symbols::RIGHT_PARENTHESE);
+        
+        return *this;
+        
+    }
+
     query& query::SELECT(const std::string& column)
     {
         if (_query.size() == 0)
