@@ -35,6 +35,16 @@ For `make` you will need to handle this depedency.
 CMake
 -------------
 
+**NOTE:** Currently `fmt` is not handled by CMake (for now), therefore first install this dependency.
+
+To build using Cmake:
+
+    mkdir build
+    cd build
+    cmake ..
+    make
+
+
 **TBW**
 
 -------------
