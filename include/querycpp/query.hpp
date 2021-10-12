@@ -44,7 +44,7 @@ public:
     {
         std::string columns_str = "";
 
-        for (const auto column : columns)
+        for (const auto& column : columns)
         {
             columns_str = fmt::format("{}{}, ", columns_str, column_as_str(column));
         }
@@ -217,7 +217,7 @@ public:
             
     }
 
-    template<typename T> query& IN(const column column, const std::vector<T> params)
+    template<typename T> query& IN(const column col, const std::vector<T> params)
     {
         std::string params_list;
 
@@ -229,7 +229,7 @@ public:
         params_list = params_list.substr(0, params_list.length() - 2); 
 
         
-        _query = fmt::format("{} {} {} {}{}{}", _query, column.name(), commands::IN,
+        _query = fmt::format("{} {} {} {}{}{}", _query, col.name(), commands::IN,
                              common::symbols::LEFT_PARENTHESE, params_list, common::symbols::RIGHT_PARENTHESE);
         return *this;
         
