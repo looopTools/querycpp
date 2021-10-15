@@ -3,10 +3,13 @@
 
 #include <string>
 
+
 namespace querycpp::constraints
 {
     // Keys
     const std::string PRIMARY = "PRIMARY KEY";
+    const std::string UNIQUE = "UNIQUE";
+    const std::string DEFAULT = "DEFAULT"; 
 
 namespace postgre
 {

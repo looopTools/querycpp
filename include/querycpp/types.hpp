@@ -17,7 +17,10 @@ namespace numerical
 namespace string
 {
     const std::string VARCHAR = "VARCHAR";
+    const std::string UUID = "UUID";
 }
+
+    
 }
 
 namespace querycpp::type::postgres
