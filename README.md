@@ -1,3 +1,20 @@
+# QueryC++ 
+
+QueryC++ is a SQL query builder library for modern C++ supporting multiple SQL dialects. 
+
+*NOTE:* As of version 1.x.x this library is "stable" enough for usage in production with PostgreSQL database but key features still missing and these features are being added a long the way. 
+
+## External Dependencies 
+
+QueryC++ 
+
+| Dependency | Link                          |
+| :---:      | :---:                         |
+| fmtlib     | https://github.com/fmtlib/fmt |
+
+
+
+
 # Querry C++ 
 
 Querry C++ is a library for easy SQL query building for modern C++ for multiple SQL dialects. 
