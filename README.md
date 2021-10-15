@@ -6,11 +6,17 @@ QueryC++ is a SQL query builder library for modern C++ supporting multiple SQL d
 
 ## External Dependencies 
 
-QueryC++ 
+QueryC++ as a library have one external dependency which is [fmtlib](https://github.com/fmtlib/fmt). 
+It is the plan to move QueryC++ to follow the C++20 standard as soon as [llvm clang++](https://clang.llvm.org/) fully support [`std::format`](https://en.cppreference.com/w/cpp/utility/format/format) and move to use `std::format` instead of `fmtlib` (although it is the same thing).
 
-| Dependency | Link                          |
-| :---:      | :---:                         |
-| fmtlib     | https://github.com/fmtlib/fmt |
+For testing we use [Google Test for C++](https://google.github.io/googletest/)
+
+
+
+| Dependency  | Link                                 |
+| :---:       | :---:                                |
+| fmtlib      | https://github.com/fmtlib/fmt        |
+| Google Test | https://google.github.io/googletest/ |
 
 
 
