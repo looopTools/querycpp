@@ -29,7 +29,10 @@ namespace querycpp::commands
     const std::string SELECT = "SELECT";
 
     /// LIST Operators
-    const std::string IN = "IN"; 
+    const std::string IN = "IN";
+
+    /// SET
+    const std::string SET = "SET";
 
     /// ORDER
     const std::string ORDER_BY = "ORDER BY";
