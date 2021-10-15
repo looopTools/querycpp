@@ -352,32 +352,6 @@ private:
 
     }
 
-    template<typename T> std::string create_default(const T& val, bool is_func = false)
-    {
-        if (helpers::is_numerical(val))
-        {
-            return fmt::format("{} {}", constraints::DEFAULT, std::to_string(val));
-        }
-        else if constexpr (std::is_same<T, std::string>::value && !is_func)
-        {
-            return fmt::format("{} '{}'", constraints::DEFAULT, val);
-        }
-        else if constexpr (std::is_same<T, std::string>::value && is_func)
-        {
-            return fmt::format("{} {}", constraints::DEFAULT, val);
-        }
-        else if constexpr (std::is_same<T, bool>::value)
-        {
-            std::string _val = val ? "true" : "false";
-            return fmt::format("{} {}", constraints::DEFAULT, val);
-        }
-        else
-        {
-            throw std::runtime_error("Unsupported data for DEFAULT"); 
-        }
-        
-    }
-
     
 private:
 

@@ -1,6 +1,7 @@
 #ifndef QUERYCPP_HELPERS_HPP
 #define QUERYCPP_HELPERS_HPP
 
+#include <querycpp/constraints.hpp>
 #include <querycpp/common.hpp>
 #include <querycpp/column.hpp>
 #include <querycpp/sql_string.hpp>
@@ -97,7 +98,35 @@ namespace querycpp::helpers
         }
 
         throw std::runtime_error("Cannot convert type to SQL safe str unsupported type");
-    }    
+    }
+
+    template<typename T> std::string create_default(const T& val, bool is_func = false)
+    {
+        if constexpr (std::is_same<T, std::string>::value)
+        {
+            if (is_func)
+            {
+                return fmt::format("{} {}", constraints::DEFAULT, val);
+            }
+            else
+            {
+                return fmt::format("{} '{}'", constraints::DEFAULT, val);
+            }
+        }
+        else if constexpr (std::is_same<T, bool>::value)
+        {
+            std::string _val = val ? "true" : "false";
+            return fmt::format("{} {}", constraints::DEFAULT, val);
+        }
+        else if (helpers::is_numerical(val))
+        {
+            return fmt::format("{} {}", constraints::DEFAULT, std::to_string(val));
+        }        
+        else
+        {
+            throw std::runtime_error("Unsupported data for DEFAULT"); 
+        }
+    }        
 }
 
 #endif /* QUERYCPP_HELPERS_HPP */

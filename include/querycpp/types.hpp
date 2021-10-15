@@ -6,6 +6,7 @@
 
 namespace querycpp::type::common
 {
+    const std::string BOOLEAN = "BOOLEAN";
 
 namespace numerical
 {
