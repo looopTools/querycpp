@@ -6,6 +6,7 @@
 
 #include "querycpp/common.hpp" 
 #include "querycpp/commands.hpp"
+#include "querycpp/constraints.hpp"
 
 #include "querycpp/helpers.hpp"
 
@@ -364,6 +365,15 @@ private:
         else if constexpr (std::is_same<T, std::string>::value && is_func)
         {
             return fmt::format("{} {}", constraints::DEFAULT, val);
+        }
+        else if constexpr (std::is_same<T, bool>::value)
+        {
+            std::string _val = val ? "true" : "false";
+            return fmt::format("{} {}", constraints::DEFAULT, val);
+        }
+        else
+        {
+            throw std::runtime_error("Unsupported data for DEFAULT"); 
         }
         
     }
