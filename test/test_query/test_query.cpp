@@ -548,6 +548,24 @@ TEST(test_querycpp_query, DELETE)
     EXPECT_EQ(EXPECTED, query.str());
 }
 
+TEST(test_querycpp_query, test_UPDATE)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2", querycpp::constraints::UNIQUE});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl); 
+
+    std::vector<std::pair<querycpp::column, std::string>> updates;
+    auto update = std::make_pair(id, std::to_string(10)); 
+    updates.emplace_back(update);
+
+    update = {text, std::string("'Yoda'")};
+    updates.emplace_back(update);    
+    
+    std::string EXPECTED = "UPDATE test SET id = 10, text = 'Yoda'";
+    EXPECT_EQ(EXPECTED, query.UPDATE(updates).str()); 
+}
+
 
 TEST(test_querycpp_query, group_by_column)
 {

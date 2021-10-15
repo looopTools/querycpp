@@ -235,7 +235,6 @@ public:
         return *this;
         
     }
-
     
     query& BEGIN_NESTED();
     query& END_NESTED();
@@ -249,6 +248,29 @@ public:
     query& INSERT(std::vector<std::vector<std::string>> values);
 
     query& DELETE();
+
+    
+    query& UPDATE(const std::vector<std::pair<column, std::string>>& column_update_value)
+    {
+        std::string update_string = "";
+        for (const auto& pair : column_update_value)
+        {
+            update_string = fmt::format("{}{} = {}, ", update_string, pair.first.name(), pair.second);
+        }
+
+        update_string = update_string.substr(0, update_string.length() - 2); 
+
+        if (_query.empty())
+        {
+            _query = fmt::format("{} {} {} {}", commands::UPDATE, _table.name(), commands::SET, update_string); 
+        }
+        else
+        {
+            _query = fmt::format("{} {} {} {} {}", _query, commands::UPDATE, _table.name(), commands::SET, update_string); 
+        }
+
+        return *this; 
+    }
 
     /// Group by 
     template<typename T> query& GROUP_BY(T val)
