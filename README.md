@@ -21,7 +21,65 @@ Links to the two dependencies.
 | Google Test | https://google.github.io/googletest/ |
 
 
+## Build 
 
+In this section we describe how you build QueryC++ with `make`, `cmake`, and `waf`. 
+
+QueryC++ is by default build with `clang++`
+
+### Make 
+
+For `make` simply run `make` in the root folder. 
+This will create a folder called `out` where the library and the include files will be placed. 
+
+### CMake
+
+For `cmake` create a directory called `build`. 
+Change into the build directory and run `cmake ..` this will generate the needed files to run classic `make`.
+As shown below: 
+
+```bash
+mkdir build 
+cd build 
+cmake ..
+make 
+```
+
+This will put the library file in the build folder. 
+
+
+### Waf 
+
+[waf.io](https://waf.io/) is depended on Python so you will have to install this first. 
+
+First you will need to configure the QueryC++ project  by running `python waf configure` in the root folder of the QueryC++ project folder. 
+Next you will have to run `python waf build`, this builds QueryC++ and place the library file in the generated build directory.
+
+```bash 
+python waf configure 
+python waf build 
+```
+
+## Run Test
+
+After you build with `CMake` or `waf` you can run the QueryC++ test.
+
+For `cmake` run in the build folder
+
+```bash 
+make test
+```
+
+For `waf` run the following command in the QueryC++ project root folder.
+
+```bash
+python waf test
+```
+
+
+## Conan
+
+*TBW*
 
 # Querry C++ 
 
