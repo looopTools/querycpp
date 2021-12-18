@@ -56,6 +56,7 @@ def build(bld):
 
     # Build Examples
     bld.recurse('examples/simple_example')
+    bld.recurse('examples/select_in_example')    
     
 def test(ctx):
 #    subprocess.call(['./build/test/test_database_data_types/test_database_data_types'], encoding='utf-8')        
