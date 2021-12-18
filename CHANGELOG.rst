@@ -1,4 +1,13 @@
-* [latest] 1.1.0
+* [latest] 1.2.0
+ - Moved back to using README.md instead of RST version
+ - Added datat type for UUID
+ - Added Unique and Default constraints
+ - Added UPDATE
+ - Using reference
+ - (Internal) we swapped to using name() instead of str() inside for increased readability, we recommend you do the same
+ - We renamed input params col to column 
+  
+* 1.1.0
   - Added support for FOREING KEY REFERENCE
   - Added a SQL safe string type
   - Added IN function using column instead of std::string, the later is still an option
