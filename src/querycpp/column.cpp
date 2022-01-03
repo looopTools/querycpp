@@ -71,7 +71,7 @@ namespace querycpp
         return ss.str(); 
     }
 
-    bool column::operator==(const column& other)
+    bool column::operator==(const column& other) const
     {
         return str() == other.str(); 
     }

@@ -17,7 +17,7 @@ def configure(cnf) :
     cnf.load('compiler_cxx')
 
     link_flags = ['-pthread']
-    cxx_flags = ['-std=c++17', '-Wall', '-Wextra', '-O3']
+    cxx_flags = ['-std=c++20', '-Wall', '-Wextra', '-O3']
     
     if sys.platform == 'darwin':
         link_flags.append('-L/usr/local/opt/llvm/lib')

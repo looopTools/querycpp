@@ -50,7 +50,7 @@ public:
     /// creates a string representation of the column
     std::string str() const;
 
-    bool operator==(const column& other);
+    bool operator==(const column& other) const;
     
     column& operator=(const column& other);
 
