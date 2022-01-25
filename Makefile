@@ -1,5 +1,5 @@
 CXX = clang++
-CXX_FLAGS = -std=c++20 -c
+CXX_FLAGS = -std=c++17 -c
 LINK_FLAGS = -lfmt
 
 AR = ar
