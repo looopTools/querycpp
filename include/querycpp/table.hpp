@@ -43,7 +43,7 @@ public:
         if (!is_supported)
         {
             
-            throw std::invalid_argument(fmt::format("col must be of type std::string or type querycpp::column. You provided a {}", typeid(T)));
+            throw std::invalid_argument("col must be of type std::string or type querycpp::column");
         }
 
         bool constexpr is_string = std::is_same<T, std::string>::value;
