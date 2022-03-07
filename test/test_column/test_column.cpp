@@ -30,6 +30,15 @@ TEST(test_querycpp_column, test_varchar)
     EXPECT_EQ(EXPECTED, column.str()); 
 }
 
+TEST(test_querycpp_column, test_varchar_NOT_NULL)
+{
+    const std::string EXPECTED = "text VARCHAR(3) NOT NULL";
+
+    querycpp::column column("text", querycpp::type::common::string::VARCHAR, {"3", querycpp::constraints::NOT_NULL});
+    
+    EXPECT_EQ(EXPECTED, column.str()); 
+}
+
 TEST(test_querycpp_column, test_postgre_numerical)
 {
     const std::string EXPECTED_SERIAL = "id SERIAL"; 
