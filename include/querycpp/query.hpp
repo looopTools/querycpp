@@ -117,17 +117,15 @@ public:
     }
 
     template<typename T> std::string COUNT_COLUMN(T col)
-    {
-        std::string pattern = commands::COUNT + "({})";
-        
+    {   
         if constexpr (std::is_same<T, std::string>::value)
         {
-            return fmt::format(pattern, col);
+            return fmt::format("{}({})", commands::COUNT, col);
         }
 
         if constexpr(std::is_same<T, column>::value)
         {
-            return fmt::format(pattern, col.name()); 
+            return fmt::format("{}({})", commands::COUNT, col.name());
         }
 
         throw std::runtime_error("Unsupported datatype for count column"); 

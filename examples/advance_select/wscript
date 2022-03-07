@@ -1,0 +1,8 @@
+def build(bld):
+
+    bld(features = 'cxx cxxprogram',
+        target = 'advance_select',
+        source = 'advance_select.cpp',
+        lib = ['fmt'],
+        use = ['querycpp-includes', 'querycpp']
+    )
