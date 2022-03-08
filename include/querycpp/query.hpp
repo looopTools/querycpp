@@ -90,6 +90,29 @@ public:
     /// @param column is the name of the column or wilde card. Default is wilde card
     query& SELECT_EXISTS(const std::string& column = "*");
 
+    template<typename T> query& SELECT_EXISTS(T& col)
+    {
+        std::string col_str; 
+        if  constexpr (std::is_same<T, std::string>::value)
+        {
+            col_str = col; 
+        }
+        else if constexpr(std::is_same<T, column>::value)
+        {
+            col_str = col.name(); 
+        }
+
+        if (_query.empty())
+        {
+            _query = fmt::format("{} {}{}{}{} {} {}", commands::SELECT, commands::EXISTS, common::symbols::LEFT_PARENTHESE, col_str, common::symbols::RIGHT_PARENTHESE, commands::FROM, _table.name());
+        }
+        else
+        {
+            _query = fmt::format("{} {} {}{}{}{} {} {}", _query, commands::SELECT, commands::EXISTS, common::symbols::LEFT_PARENTHESE, col_str, common::symbols::RIGHT_PARENTHESE, commands::FROM, _table.name());
+        }
+        return *this; 
+    }
+
     /// Count number of eleements in database
     /// @param param is either a column or the name of a column as string 
     template<typename T> query& COUNT(T param)
