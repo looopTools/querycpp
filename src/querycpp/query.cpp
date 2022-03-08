@@ -16,7 +16,7 @@ namespace querycpp
 
         if (if_not_exists)
         {
-            ss << fmt::format("{} {} {} {} (", commands::CREATE, commands::IF_NOT_EXISTS, commands::TABLE, _table.name());
+            ss << fmt::format("{} {} {} {} (", commands::CREATE, commands::TABLE, commands::IF_NOT_EXISTS , _table.name());
         }
         else
         {

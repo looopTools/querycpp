@@ -82,7 +82,7 @@ TEST(test_querycpp_query, test_create_exists)
     querycpp::table tbl("test", {id, text});
     querycpp::query query(tbl); 
 
-    std::string EXPECTED = "CREATE IF NOT EXISTS TABLE test (id SERIAL PRIMARY KEY, text VARCHAR(2))";
+    std::string EXPECTED = "CREATE TABLE IF NOT EXISTS test (id SERIAL PRIMARY KEY, text VARCHAR(2))";
     EXPECT_EQ(EXPECTED, query.CREATE(true).str()); 
 }
 
@@ -146,7 +146,7 @@ TEST(test_querycpp_query, test_create_references_if_not_exists)
     auto test_tuple = std::make_tuple(idx, tbl_ref, id_ref);
     references.emplace_back(test_tuple);
     
-    std::string EXPECTED = "CREATE IF NOT EXISTS TABLE test (id SERIAL PRIMARY KEY, idx SERIAL, text VARCHAR(2), FOREING KEY (idx) REFERENCES ref_tbl(id))";
+    std::string EXPECTED = "CREATE TABLE IF NOT EXISTS test (id SERIAL PRIMARY KEY, idx SERIAL, text VARCHAR(2), FOREING KEY (idx) REFERENCES ref_tbl(id))";
     EXPECT_EQ(EXPECTED, query.CREATE(references, true).str()); 
 }
 
@@ -168,7 +168,7 @@ TEST(test_querycpp_query, test_create_multiple_references_if_not_exists)
     references.emplace_back(test_tuple);
     references.emplace_back(test_tuple);    
     
-    std::string EXPECTED = "CREATE IF NOT EXISTS TABLE test (id SERIAL PRIMARY KEY, idx SERIAL, text VARCHAR(2), FOREING KEY (idx) REFERENCES ref_tbl(id), FOREING KEY (idx) REFERENCES ref_tbl(id))";
+    std::string EXPECTED = "CREATE TABLE IF NOT EXISTS test (id SERIAL PRIMARY KEY, idx SERIAL, text VARCHAR(2), FOREING KEY (idx) REFERENCES ref_tbl(id), FOREING KEY (idx) REFERENCES ref_tbl(id))";
     EXPECT_EQ(EXPECTED, query.CREATE(references, true).str()); 
 }
 
