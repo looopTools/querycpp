@@ -1,4 +1,6 @@
-* [latest] 1.2.0
+* [latest] 3.0.3
+  - Fixing error for CREATE IF NOT EXISTS 
+* 1.2.0
  - Moved back to using README.md instead of RST version
  - Added datat type for UUID
  - Added Unique and Default constraints
