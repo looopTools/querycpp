@@ -1,4 +1,4 @@
-* [latest] 3.0.3
+* [latest] 3.0.4
   - Fixing error for CREATE IF NOT EXISTS 
 * 1.2.0
  - Moved back to using README.md instead of RST version
