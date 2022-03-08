@@ -51,6 +51,28 @@ TEST(test_querycpp_query, test_create_default)
     EXPECT_EQ(EXPECTED, query.CREATE().str()); 
 }
 
+TEST(test_querycpp_query, test_create_default_UUID_postgres)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2", querycpp::constraints::UNIQUE});
+
+    std::string uuid_func = "uuid_generate_v4()"; 
+    querycpp::column token("token", querycpp::type::common::string::UUID, {querycpp::constraints::DEFAULT, querycpp::constraints::postgre::uuid::GENERATE_V4});
+
+    std::string _name = "Jane Doe";
+    querycpp::column name("name", querycpp::type::common::string::VARCHAR, {"255", querycpp::helpers::create_default(_name)});
+
+    bool a = false;
+
+    querycpp::column is_set("is_set", querycpp::type::common::BOOLEAN, {querycpp::helpers::create_default(a)});
+    
+    querycpp::table tbl("test", {id, text, token, name, is_set});
+    querycpp::query query(tbl); 
+
+    std::string EXPECTED = "CREATE TABLE test (id SERIAL PRIMARY KEY, text VARCHAR(2) UNIQUE, token UUID DEFAULT uuid_generate_v4(), name VARCHAR(255) DEFAULT 'Jane Doe', is_set BOOLEAN DEFAULT false)";
+    EXPECT_EQ(EXPECTED, query.CREATE().str()); 
+}
+
 
 
 TEST(test_querycpp_query, test_create_exists)
