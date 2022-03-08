@@ -268,6 +268,22 @@ public:
     query& INSERT(const std::vector<column>& columns, std::vector<std::vector<std::string>> values);
     query& INSERT(std::vector<std::vector<std::string>> values);
 
+    template<typename T> query& RETURNING(T& col)
+    {
+        std::string col_str;
+        if constexpr (std::is_same<T, std::string>::value)
+        {
+            col_str = col;
+        }
+        else if constexpr (std::is_same<T, column>::value)
+        {
+            col_str = col.name(); 
+        }
+
+        _query = fmt::format("{} {} {}", _query, commands::RETURNING, col_str);
+        return *this; 
+    }
+
     query& DELETE();
 
     

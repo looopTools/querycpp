@@ -575,6 +575,22 @@ TEST(test_querycpp_query, test_insert_values)
     EXPECT_EQ(EXPECTED, query.str());    
 }
 
+TEST(test_querycpp_query, test_insert_default_returning)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl);
+
+    std::vector<std::vector<std::string>> values = {{querycpp::constraints::DEFAULT, querycpp::constraints::DEFAULT}}; 
+    
+    std::string EXPECTED = "INSERT INTO test (id, text) VALUES (DEFAULT, DEFAULT) RETURNING id"; 
+
+    query.INSERT({id, text}, values).RETURNING(id);
+
+    EXPECT_EQ(EXPECTED, query.str());
+}
+
 
 TEST(test_querycpp_query, DELETE)
 {
