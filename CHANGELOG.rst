@@ -1,4 +1,7 @@
-* [IMPORTANT] [latest] 3.0.5
+* [latest] 3.0.6
+  - Adding support for using vector of columns and strings in RETURNING
+  - Allowing for multiple return functions to be defined 
+* [IMPORTANT] 3.0.5
   - Fixing mispelling of FOREIGN
   - Moving FOREIGN KEY from commands to constraints (makes more sense) and renames to just FOREIGN 
 * 3.0.4
