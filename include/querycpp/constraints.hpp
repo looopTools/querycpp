@@ -8,6 +8,7 @@ namespace querycpp::constraints
 {
     // Keys
     const std::string PRIMARY = "PRIMARY KEY";
+    const std::string FOREIGN = "FOREIGN KEY"; 
     const std::string UNIQUE = "UNIQUE";
     const std::string DEFAULT = "DEFAULT";
     const std::string NOT_NULL = "NOT NULL"; 

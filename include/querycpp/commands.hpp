@@ -50,7 +50,6 @@ namespace querycpp::commands
     const std::string VALUES = "VALUES";
     const std::string RETURNING = "RETURNING";
 
-    const std::string FOREING_KEY = "FOREING KEY";
     const std::string REFERENCES = "REFERENCES";
         
     

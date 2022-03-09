@@ -1,4 +1,7 @@
-* [latest] 3.0.4
+* [IMPORTANT] [latest] 3.0.5
+  - Fixing mispelling of FOREIGN
+  - Moving FOREIGN KEY from commands to constraints (makes more sense) and renames to just FOREIGN 
+* 3.0.4
   - Fixing error for CREATE IF NOT EXISTS 
 * 1.2.0
  - Moved back to using README.md instead of RST version

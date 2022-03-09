@@ -50,7 +50,7 @@ namespace querycpp
             std::tie(loc_col, ref_tbl, ref_col) = reference; 
                 
             reference_stream << fmt::format("{} {}{}{} {} {}{}{}{}, ",
-                                            commands::FOREING_KEY, common::symbols::LEFT_PARENTHESE,
+                                            constraints::FOREIGN, common::symbols::LEFT_PARENTHESE,
                                             loc_col.name(),
                                             common::symbols::RIGHT_PARENTHESE,
                                             commands::REFERENCES,
