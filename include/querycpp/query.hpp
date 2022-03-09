@@ -268,18 +268,38 @@ public:
     query& INSERT(const std::vector<column>& columns, std::vector<std::vector<std::string>> values);
     query& INSERT(std::vector<std::vector<std::string>> values);
 
-    template<typename T> query& RETURNING(T& col)
+    template<typename T> query& RETURNING(T& cols)
     {
-        std::string col_str;
+        std::string col_str = "";
+
         if constexpr (std::is_same<T, std::string>::value)
         {
-            col_str = col;
+            col_str = cols; 
         }
         else if constexpr (std::is_same<T, column>::value)
         {
-            col_str = col.name(); 
+            col_str = cols.name(); 
         }
+        else if constexpr (std::is_same<T, std::vector<std::string>>::value)
+        {
+            auto it = cols.begin(); 
+            for (; it < cols.end() - 1; ++it)
+            {
+                col_str = fmt::format("{}{}, ", col_str, (*it));
+            }
 
+            col_str = fmt::format("{}{}", col_str, (*it));
+        }
+        else if constexpr (std::is_same<T, std::vector<column>>::value)
+        {
+            auto it = cols.begin(); 
+            for (; it < cols.end() - 1; ++it)
+            {
+                col_str = fmt::format("{}{}, ", col_str, (*it).name());
+            }
+            col_str = fmt::format("{}{}", col_str, (*it).name());
+        }
+        
         _query = fmt::format("{} {} {}", _query, commands::RETURNING, col_str);
         return *this; 
     }
