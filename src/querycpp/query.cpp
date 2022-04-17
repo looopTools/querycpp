@@ -70,6 +70,25 @@ namespace querycpp
         
     }
 
+    query& query::DROP()
+    {
+        return drop();
+    }
+
+    query& query::drop()
+    {
+        if(_query.empty())
+        {
+            _query = fmt::format("{} {} {}", commands::DROP, commands::TABLE, _table.name());  
+        }
+        else
+        {
+            _query = fmt::format("{} {} {} {}", _query, commands::DROP, commands::TABLE, _table.name()); 
+        }
+        
+        return *this; 
+    }
+
     query& query::SELECT(const std::string& column)
     {
         if (_query.size() == 0)

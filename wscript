@@ -52,7 +52,10 @@ def build(bld):
     bld.recurse('test/test_table')
     bld.recurse('test/test_query')
     bld.recurse('test/test_helpers')
-    bld.recurse('test/test_sql_string')        
+    bld.recurse('test/test_sql_string')
+
+    # "Integration tests"
+    bld.recurse("db_tests/psql_tests/")
 
     # Build Examples
     bld.recurse('examples/simple_example')

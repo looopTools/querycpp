@@ -172,6 +172,18 @@ TEST(test_querycpp_query, test_create_multiple_references_if_not_exists)
     EXPECT_EQ(EXPECTED, query.CREATE(references, true).str()); 
 }
 
+TEST(test_querycpp_query, test_drop)
+{
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2", querycpp::constraints::UNIQUE});
+    querycpp::table tbl("test", {id, text});
+    querycpp::query query(tbl); 
+
+    std::string EXPECTED = "DROP TABLE test";
+    EXPECT_EQ(EXPECTED, query.drop().str()); 
+}
+
+
 TEST(test_querycpp_query, test_select)
 {
     querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
