@@ -8,6 +8,11 @@ namespace querycpp
     column::column(std::string name, const std::string& type, std::vector<std::string> constraints) : _name(name), _type(type), _constraints(constraints)
     {
     }
+
+
+    column::column(std::string name, const std::string& type, std::pair<std::string_view, std::shared_ptr<column>> reference, std::vector<std::string> constraints) : _name(name), _type(type), _constraints(constraints), _reference(reference) 
+    {
+    }    
     
     column::column(const column& old)
     {
@@ -46,6 +51,13 @@ namespace querycpp
         _constraints = new_constraints; 
     }
 
+    std::optional<std::pair<std::string_view, column>> column::reference() const
+    {
+        column col = *(_reference.second.get());
+        auto pair = std::make_pair(_reference.first, col);
+        return _reference.first.empty() ? std::nullopt : std::optional<std::pair<std::string_view, column>>(pair);
+    }
+    
     std::string column::str() const
     {
 

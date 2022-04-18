@@ -107,6 +107,25 @@ TEST(test_querycpp_query, test_create_references)
     EXPECT_EQ(EXPECTED, query.CREATE(references).str()); 
 }
 
+TEST(test_querycpp_query, test_create_references_new)
+{
+    querycpp::column id_ref("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+    querycpp::table tbl_ref("ref_tbl", {id_ref});
+    
+    querycpp::column id("id", querycpp::type::postgres::numerical::SERIAL, {querycpp::constraints::PRIMARY});
+
+    std::pair<std::string_view, std::shared_ptr<querycpp::column>> ref_pair = make_pair(std::string_view(tbl_ref.name()), std::make_shared<querycpp::column>(id_ref));
+    
+    querycpp::column idx("idx", querycpp::type::postgres::numerical::SERIAL, ref_pair);    
+    querycpp::column text("text", querycpp::type::common::string::VARCHAR, {"2"});
+    querycpp::table tbl("test", {id, idx, text});
+    querycpp::query query(tbl); 
+
+
+    std::string EXPECTED = "CREATE TABLE test (id SERIAL PRIMARY KEY, idx SERIAL, text VARCHAR(2), FOREIGN KEY (idx) REFERENCES ref_tbl(id))";
+    EXPECT_EQ(EXPECTED, query.CREATE().str()); 
+}
+
 TEST(test_querycpp_query, test_create_multiple_references)
 {
 

@@ -23,14 +23,33 @@ namespace querycpp
             ss << fmt::format("{} {} {} (", commands::CREATE, commands::TABLE, _table.name());
         }
 
+        std::stringstream reference_stream;
 
         for (const auto& column : _table.columns())
         {
-            ss << column.str() << ", "; 
+            ss << column.str() << ", ";
+            
+            if (auto reference = column.reference())
+            {
+                reference_stream << fmt::format("{} {}{}{} {} {}{}{}{}, ",
+                                                constraints::FOREIGN, common::symbols::LEFT_PARENTHESE,
+                                                column.name(),
+                                                common::symbols::RIGHT_PARENTHESE,
+                                                commands::REFERENCES,
+                                                (*reference).first,
+                                                common::symbols::LEFT_PARENTHESE,
+                                                (*reference).second.name(),
+                                                common::symbols::RIGHT_PARENTHESE);                
+            }
+                
         }
 
         _query = ss.str().substr(0, ss.str().size() - 2) + ")";
-        
+        auto reference_str = reference_stream.str();
+        reference_str = reference_str.substr(0, reference_str.length() - 2);
+
+        _query = fmt::format("{}, {}{}", _query.substr(0, _query.length() - 1),
+                             reference_str, common::symbols::RIGHT_PARENTHESE);        
         return *this; 
     }
 

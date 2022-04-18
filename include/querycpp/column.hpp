@@ -6,6 +6,9 @@
 #include <string>
 #include <vector>
 
+#include <utility>
+#include <optional>
+
 namespace querycpp
 {
 /// The column class represents the column concept of SQL
@@ -22,6 +25,8 @@ public:
     /// @param constratins is a collection of the constraints for the column
     /// For detailed describtion of constraints see the QueryC++ manual
     column(std::string name, const std::string& type, std::vector<std::string> constraints = std::vector<std::string>());
+
+    column(std::string name, const std::string& type, std::pair<std::string_view, std::shared_ptr<column>> reference, std::vector<std::string> constraints = std::vector<std::string>());
     
     column(const column& old); 
 
@@ -47,6 +52,8 @@ public:
     /// @param list of new constraints 
     void constraints(const std::vector<std::string>& new_constraints);
 
+    std::optional<std::pair<std::string_view, column>> reference() const; 
+    
     /// creates a string representation of the column
     std::string str() const;
 
@@ -65,6 +72,7 @@ private:
     std::string _type; 
     std::vector<std::string> _constraints;
 
+    std::pair<std::string_view, std::shared_ptr<column>> _reference;
 }; 
 }
 
