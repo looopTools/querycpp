@@ -37,8 +37,9 @@ public:
 
     query& CREATE(const std::vector<std::tuple<column, table, column>> references, const bool if_not_exists = false);
 
-    query& DROP();
-    query& drop();     
+    query& DROP(bool cascading=false);
+
+    query& drop(bool cascading=false);
 
     /// Single column select statement
     /// @param column is the name of the column or wildecard. Default is wilde card

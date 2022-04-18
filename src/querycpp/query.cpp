@@ -70,12 +70,12 @@ namespace querycpp
         
     }
 
-    query& query::DROP()
+    query& query::DROP(bool cascading)
     {
-        return drop();
+        return drop(cascading);
     }
 
-    query& query::drop()
+    query& query::drop(bool cascading)
     {
         if(_query.empty())
         {
@@ -84,6 +84,11 @@ namespace querycpp
         else
         {
             _query = fmt::format("{} {} {} {}", _query, commands::DROP, commands::TABLE, _table.name()); 
+        }
+
+        if (cascading)
+        {
+            _query = fmt::format("{} {}", _query, "CASCADE");
         }
         
         return *this; 
