@@ -1,0 +1,8 @@
+def build(bld):
+
+    bld(features = 'cxx cxxprogram',
+        target = 'psql_test',
+        source = 'psql_test.cpp',
+        lib = ['fmt', 'pq', 'pqxx'],
+        use = ['querycpp-test-includes', 'querycpp', 'gtest']
+    )
